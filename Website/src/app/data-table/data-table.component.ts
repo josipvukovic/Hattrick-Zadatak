@@ -31,8 +31,8 @@ export class DataTableComponent implements AfterViewInit {
     this.table.dataSource = this.dataSource;
   }
 
-  doAlert(): void {
-    console.log("alert");
+  doAlert(row: any){
+    console.log("data: " + row.homeTeam);
     this.toggle = !this.toggle;
   }
 }

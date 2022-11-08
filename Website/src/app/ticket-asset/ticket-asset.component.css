@@ -1,0 +1,92 @@
+.ticket-container{
+    background-color: #19457a;
+    width: 14%;
+    float: right;
+    margin-right: 230px;
+}
+
+.tab{
+    color: white;
+    text-align: center;
+    height: 35px;
+    margin-top: 17px;
+    font-family: Roboto,sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.ticket-bet{
+    /* background-color: #282a2e; */
+    color: white;
+    font-family: Roboto,sans-serif;
+    font-size: 13px;
+    width: 90%;
+    /* margin: auto; */
+    text-align: center;
+    height: 20px;
+    padding-top: 5px;
+}
+
+.bet-description{
+    /* background-color: #282a2e; */
+    color: #ABACAD;
+    font-family: Roboto,sans-serif;
+    font-size: 11px;
+    width: 90%;
+    margin: auto;
+
+}
+
+.ticket-body-content{
+    background-color: #282a2e;
+    width: 90%;
+    margin: auto;
+    height: 45px;
+
+}
+
+table, tr, td, thead, tbody {
+    display: block!important;
+}
+
+tr {
+    float: left!important; 
+    width: 50%!important;
+}
+
+.ticket-summary{
+    color:white;
+    font-family: Roboto,sans-serif;
+    font-size: 13px;
+}
+
+table{
+    text-align: center;
+    height: 30px;
+    margin-top: 5px;
+}
+
+.ticket-button{
+    display: flow-root;
+}
+
+.bet-button{
+    background-color: #19457a;
+    color: white;
+    border-color: white;
+    border-style: solid;
+    border-width: thin;
+    float: right;
+    margin-right: 10px;
+    font-size: 15px;
+    font-family: Roboto,sans-serif;
+}
+
+.ticket-footer{
+    float: right;
+    color: #c4d3e6;
+    font-size: 11px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}

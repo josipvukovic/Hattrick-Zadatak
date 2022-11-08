@@ -25,7 +25,7 @@
     <ng-container matColumnDef="homeWin">
       <th mat-header-cell *matHeaderCellDef>1</th>
       <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
-      <td mat-cell class="odds" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="doAlert(row)">{{row.homeWin | number : '.2-2'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="draw">

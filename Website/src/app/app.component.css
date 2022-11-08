@@ -6,3 +6,12 @@
 .ad-img{
     float: left;
 }
+
+.row {
+    margin-top: 20px;
+  }
+
+  .table{
+    float: left;
+    width: 50%;
+  }

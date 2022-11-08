@@ -1,12 +1,10 @@
 .data-table{
   width: 100%;
-  margin: 20px auto;
 }
 
 .mat-elevation-z8{
-  width: 50%;
   margin: auto;
-  margin-left: 457px;
+  margin-left: 15px;
 }
 
 .odds:hover {

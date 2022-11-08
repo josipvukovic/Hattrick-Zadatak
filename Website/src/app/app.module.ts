@@ -9,12 +9,14 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TicketAssetComponent } from './ticket-asset/ticket-asset.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DataTableComponent
+    DataTableComponent,
+    TicketAssetComponent
   ],
   imports: [
     BrowserModule,
