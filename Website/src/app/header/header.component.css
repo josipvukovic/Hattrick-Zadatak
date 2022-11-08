@@ -1,0 +1,42 @@
+.main-container{
+    margin-left: auto;
+    margin-right: auto;
+    width: 76%;
+}
+
+nav{
+    background-color: #19457a;
+    width: 100%;
+    font-family: Roboto,sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    /* padding: 0 13px; */
+    vertical-align: top;
+}
+
+nav img{
+    width: 11%;
+    /* float:left; */
+}
+
+nav ul{
+    float:right;
+    list-style-type: none;
+}
+
+ul{
+    padding-top: 5px;
+}
+
+ul li{
+    display: inline-block;
+    padding-right: 60px;
+}
+
+li a{
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    position: relative;
+    vertical-align: sub;
+}

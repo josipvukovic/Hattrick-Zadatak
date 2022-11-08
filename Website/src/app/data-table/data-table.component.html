@@ -1,0 +1,88 @@
+<div class="mat-elevation-z8">
+  <table mat-table class="data-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <!-- <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container> -->
+
+    <!-- Name Column -->
+    <!-- <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container> -->
+
+    <ng-container matColumnDef="homeTeam">
+      <th mat-header-cell *matHeaderCellDef>Osnovna ponuda</th>
+      <td mat-cell class="teamName" *matCellDef="let row">{{row.homeTeam}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="awayTeam">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell class="teamName" *matCellDef="let row">{{row.awayTeam}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="homeWin">
+      <th mat-header-cell *matHeaderCellDef>1</th>
+      <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
+      <td mat-cell class="odds" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="draw">
+      <th mat-header-cell *matHeaderCellDef>X</th>
+      <td mat-cell class="odds" *matCellDef="let row">{{row.draw | number : '.2-2'}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="awayWin">
+      <th mat-header-cell *matHeaderCellDef>2</th>
+      <td mat-cell class="odds" *matCellDef="let row">{{row.awayWin | number : '.2-2'}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="homeOrDraw">
+      <th mat-header-cell *matHeaderCellDef>1X</th>
+      <td mat-cell class="odds" *matCellDef="let row">{{row.homeOrDraw | number : '.2-2'}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="awayOrDraw">
+      <th mat-header-cell *matHeaderCellDef>X2</th>
+      <td mat-cell class="odds" *matCellDef="let row">{{row.awayOrDraw | number : '.2-2'}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="homeOrAway">
+      <th mat-header-cell *matHeaderCellDef>12</th>
+      <td mat-cell class="odds" *matCellDef="let row">{{row.homeOrAway | number : '.2-2'}}</td>
+    </ng-container> 
+
+    <ng-container matColumnDef="matchDateTime">
+      <th mat-header-cell *matHeaderCellDef>datum</th>
+      <td mat-cell class="matchDate"*matCellDef="let row">{{row.matchDateTime}}</td>
+    </ng-container> 
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      aria-label="Select page">
+  </mat-paginator>
+</div>
+
+
+<script>
+var app = angular.module("app", []);
+
+app.controller("myCtrl", function($scope) {
+
+  $scope.selectPosition = function($parentIndex, $index) {
+    $scope.selectedPosition = {
+      parent: $parentIndex,
+      index: $index
+    };
+  }
+})
+</script>
