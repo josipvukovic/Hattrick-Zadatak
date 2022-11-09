@@ -3,41 +3,39 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { MatchService } from '../service/match.service';
-import { SpecialOfferDataSource, SpecialOffer } from './special-offer-datasource';
+import { FootballSpainDataSource, Match } from './football-spain-datasource';
 
 @Component({
-  selector: 'app-special-offer',
-  templateUrl: './special-offer.component.html',
-  styleUrls: ['./special-offer.component.css']
+  selector: 'app-football-spain',
+  templateUrl: './football-spain.component.html',
+  styleUrls: ['./football-spain.component.css']
 })
-export class SpecialOfferComponent implements AfterViewInit {
+export class FootballSpainComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<SpecialOffer>;
-  dataSource: SpecialOfferDataSource;
-  toggle = true;
-  status = 'Enable'; 
+  @ViewChild(MatTable) table!: MatTable<Match>;
+  dataSource: FootballSpainDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
 
   constructor(private matchService: MatchService) {
-    this.dataSource = new SpecialOfferDataSource();
+    this.dataSource = new FootballSpainDataSource();
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
-    this.getSpecialOfferMatches();
+    this.getFootballSpain();
   }
 
-  getSpecialOfferMatches(){
-    this.matchService.getSpecialOfferMatches()
+  getFootballSpain(){
+    this.matchService.getFootballSpain()
     .subscribe(
       response => {
         this.table.dataSource = response;
       }
-    )
+    );
   }
 }

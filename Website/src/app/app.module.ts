@@ -11,6 +11,10 @@ import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TicketAssetComponent } from './ticket-asset/ticket-asset.component';
 import { SpecialOfferComponent } from './special-offer/special-offer.component';
+import { FootballCroatiaComponent } from './football-croatia/football-croatia.component';
+import { FootballEnglandComponent } from './football-england/football-england.component';
+import { FootballSpainComponent } from './football-spain/football-spain.component';
+import { FootballItalyComponent } from './football-italy/football-italy.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { SpecialOfferComponent } from './special-offer/special-offer.component';
     HeaderComponent,
     DataTableComponent,
     TicketAssetComponent,
-    SpecialOfferComponent
+    SpecialOfferComponent,
+    FootballCroatiaComponent,
+    FootballEnglandComponent,
+    FootballSpainComponent,
+    FootballItalyComponent
   ],
   imports: [
     BrowserModule,

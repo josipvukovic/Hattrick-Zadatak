@@ -60,18 +60,3 @@
       aria-label="Select page">
   </mat-paginator>
 </div>
-
-
-<script>
-var app = angular.module("app", []);
-
-app.controller("myCtrl", function($scope) {
-
-  $scope.selectPosition = function($parentIndex, $index) {
-    $scope.selectedPosition = {
-      parent: $parentIndex,
-      index: $index
-    };
-  }
-})
-</script>

@@ -41,6 +41,7 @@
 .mat-cell {
   font-size: 14px;
   min-height: 48px;
+  /* min-width: 100px; */
   text-align: center;
   border-right: 1px solid rgb(216, 216, 216);
 }
