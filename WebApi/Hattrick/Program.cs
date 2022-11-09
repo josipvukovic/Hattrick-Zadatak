@@ -42,6 +42,8 @@ using (var scope = app.Services.CreateScope())
     context.Database.ExecuteSqlRaw(GlobalData.DbConfigurationQuery);
     //OPENROWSET query is not allowed inside migrations if database is not configured properly so we run it manually after configuration is done
     context.Database.ExecuteSqlRaw(GlobalData.InsertDataQuery);
+    //Insert Special offer matches
+    context.Database.ExecuteSqlRaw(GlobalData.InsertSpecialOffer);
 }
 
 app.UseCors("default");

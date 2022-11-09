@@ -1,4 +1,6 @@
-﻿namespace Hattrick.Data
+﻿using System.Collections.Generic;
+
+namespace Hattrick.Data
 {
     public static class GlobalData
     {
@@ -10,5 +12,18 @@
                                                "SET IDENTITY_INSERT HattrickDb.dbo.Match " +
                                                "ON INSERT INTO HattrickDb.dbo.Match(MatchId, Competition, HomeTeam ,AwayTeam, HomeWin, Draw, AwayWin, HomeOrDraw, AwayOrDraw, HomeOrAway, MatchDateTime, SpecialOffer) " +
                                                "SELECT * FROM OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0;Database=" + Environment.CurrentDirectory + "\\BettingData\\Data.xlsx;HDR=YES', 'SELECT * FROM [DATA$]')";
+
+        public static string InsertSpecialOffer = "TRUNCATE TABLE HattrickDb.dbo.SpecialOffer " +
+                                                  "SET IDENTITY_INSERT HattrickDb.dbo.SpecialOffer ON " +
+                                                  "INSERT INTO HattrickDb.dbo.SpecialOffer " +
+                                                        "([MatchId], [Competition], [HomeTeam], [AwayTeam], [HomeWin], [Draw], [AwayWin], [HomeOrDraw], [AwayOrDraw], [HomeOrAway], [MatchDateTime]) " +
+                                                  "SELECT " +
+                                                        "[MatchId], [Competition], [HomeTeam], [AwayTeam], [HomeWin], [Draw], [AwayWin], [HomeOrDraw], [AwayOrDraw], [HomeOrAway], [MatchDateTime] " + 
+                                                  "FROM " + 
+                                                        "HattrickDb.dbo.Match " +
+                                                  "WHERE " +
+                                                        "SpecialOffer = 1" +
+                                                  "UPDATE [HattrickDb].[dbo].[SpecialOffer] " +
+                                                  "SET HomeWin += 0.1, Draw += 0.1, AwayWin += 0.1, HomeOrDraw += 0.1, AwayOrDraw += 0.1, HomeOrAway += 0.1";
     }
 }

@@ -28,7 +28,7 @@ namespace Hattrick.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SpecialOffer", x => x.MatchId);
-                });
+                });       
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

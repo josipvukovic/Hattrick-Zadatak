@@ -26,6 +26,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
+        // GET match by Id
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetMatch([FromRoute] int id)
@@ -37,6 +38,52 @@ namespace Hattrick.Controllers
             }
             return NotFound("Match not found");
         }
+
+        // GET special offer matches
+        [HttpGet]
+        [Route("GetSpecialOffer")]
+        public async Task<IActionResult> GetSpecialOfferMatches()
+        {
+            var matches = await hattrickDbContext.SpecialOffer.ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET Croatian league 
+        [HttpGet]
+        [Route("GetFootballCroatia")]
+        public async Task<IActionResult> GetFootballCroatia()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Hrvatska 1")).ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET English league
+        [HttpGet]
+        [Route("GetFootballEngland")]
+        public async Task<IActionResult> GetFootballEngland()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Engleska 1")).ToListAsync();
+            return Ok(matches);
+        }
+       
+        // GET Spanish league 
+        [HttpGet]
+        [Route("GetFootballSpain")]
+        public async Task<IActionResult> GetFootballSpain()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Španjolska 1")).ToListAsync();
+            return Ok(matches);
+        }
+        
+        // GET Italian league
+        [HttpGet]
+        [Route("GetFootballItaly")]
+        public async Task<IActionResult> GetFootballItaly()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Italija 1")).ToListAsync();
+            return Ok(matches);
+        }
+
 
     }
 }
