@@ -2,7 +2,8 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { DataTableDataSource, DataTableItem } from './data-table-datasource';
+import { DataTableDataSource, Match } from './data-table-datasource';
+import { MatchService } from '../service/match.service';
 
 @Component({
   selector: 'app-data-table',
@@ -12,7 +13,7 @@ import { DataTableDataSource, DataTableItem } from './data-table-datasource';
 export class DataTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<DataTableItem>;
+  @ViewChild(MatTable) table!: MatTable<Match>;
   dataSource: DataTableDataSource;
   toggle = true;
   status = 'Enable'; 
@@ -20,7 +21,7 @@ export class DataTableComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
 
-  constructor() {
+  constructor(private matchService: MatchService) {
     this.dataSource = new DataTableDataSource();
 
   }
@@ -29,10 +30,20 @@ export class DataTableComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
+    this.getAllMatches();
   }
 
   doAlert(row: any){
     console.log("data: " + row.homeTeam);
     this.toggle = !this.toggle;
+  }
+
+  getAllMatches(){
+    this.matchService.getAllMatches()
+    .subscribe(
+      response => {
+        this.table.dataSource = response;
+      }
+    );
   }
 }

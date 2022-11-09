@@ -10,13 +10,15 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TicketAssetComponent } from './ticket-asset/ticket-asset.component';
+import { SpecialOfferComponent } from './special-offer/special-offer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     DataTableComponent,
-    TicketAssetComponent
+    TicketAssetComponent,
+    SpecialOfferComponent
   ],
   imports: [
     BrowserModule,

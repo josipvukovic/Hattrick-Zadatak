@@ -9,23 +9,10 @@ import { MatchService } from './service/match.service';
 export class AppComponent implements OnInit{
   title = 'Hattrick';
 
-  constructor(private matchService: MatchService){
-
-
+  constructor(){
   }
-
 
   ngOnInit(): void {
-    this.getAllMatches();
   }
 
-
-  getAllMatches(){
-    this.matchService.getAllMatches()
-    .subscribe(
-      response => {
-        console.log(response);
-      }
-    );
-  }
 }

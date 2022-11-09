@@ -1,12 +1,14 @@
 export interface Match{
-    id: string;
+    matchId: number;
+    competition: string;
     homeTeam: string;
     awayTeam: string;
     homeWin: number;
     draw: number;
     awayWin: number;
-    homeorDraw: number;
+    homeOrDraw: number;
     awayOrDraw: number;
     homeOrAway: number;
-    matchDateTime: Date;
+    matchDateTime: string;
+    specialOffer: number;
 }
