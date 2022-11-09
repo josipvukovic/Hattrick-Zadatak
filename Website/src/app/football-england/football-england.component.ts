@@ -6,7 +6,7 @@ import { MatchService } from '../service/match.service';
 import { FootballEnglandDataSource, Match } from './football-england-datasource';
 
 @Component({
-  selector: 'app-football-england',
+  selector: 'football-england',
   templateUrl: './football-england.component.html',
   styleUrls: ['./football-england.component.css']
 })

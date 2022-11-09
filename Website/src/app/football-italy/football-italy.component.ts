@@ -6,7 +6,7 @@ import { MatchService } from '../service/match.service';
 import { FootballItalyDataSource, Match } from './football-italy-datasource';
 
 @Component({
-  selector: 'app-football-italy',
+  selector: 'football-italy',
   templateUrl: './football-italy.component.html',
   styleUrls: ['./football-italy.component.css']
 })

@@ -6,7 +6,7 @@ import { MatchService } from '../service/match.service';
 import { FootballSpainDataSource, Match } from './football-spain-datasource';
 
 @Component({
-  selector: 'app-football-spain',
+  selector: 'football-spain',
   templateUrl: './football-spain.component.html',
   styleUrls: ['./football-spain.component.css']
 })

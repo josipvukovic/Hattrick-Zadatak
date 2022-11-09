@@ -3,17 +3,26 @@
     <div class="row">
         <div class="left-row">
             <img class="ad-img" src="https://www.psk.hr/picture/original/636939a19c97504d04ea3251">
+            <div class="side-menu">
+                <div class="side-menu-title">Preporučujemo</div>
+                <a class="side-menu-item" routerLink="/special-offer">Top Ponuda</a>
+                <a class="side-menu-item" routerLink="/football-croatia">Hrvatska 1</a>
+                <a class="side-menu-item" routerLink="/football-england">Engleska 1</a>
+                <a class="side-menu-item" routerLink="/football-spain">Španjolska 1</a>
+                <a class="side-menu-item" routerLink="/football-italy">Italija 1</a>
+            </div>
         </div>
         <div class="table">
-            <app-special-offer></app-special-offer>
-            <app-football-croatia></app-football-croatia>
-            <app-football-england></app-football-england>
-            <app-football-spain></app-football-spain>
-            <app-football-italy></app-football-italy>
-            <app-data-table></app-data-table>
+            <!-- <special-offer></special-offer>
+            <football-croatia></football-croatia>
+            <football-england></football-england> -->
+            <!-- <football-spain></football-spain>
+            <football-italy></football-italy>
+            <data-table></data-table> -->
         </div>
         <div class="ticket-container">
             <app-ticket-asset></app-ticket-asset>
         </div>
     </div>
 </main>
+<router-outlet></router-outlet>

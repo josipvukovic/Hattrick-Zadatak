@@ -6,7 +6,7 @@ import { MatchService } from '../service/match.service';
 import { SpecialOfferDataSource, SpecialOffer } from './special-offer-datasource';
 
 @Component({
-  selector: 'app-special-offer',
+  selector: 'special-offer',
   templateUrl: './special-offer.component.html',
   styleUrls: ['./special-offer.component.css']
 })

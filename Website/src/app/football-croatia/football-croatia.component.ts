@@ -6,7 +6,7 @@ import { MatchService } from '../service/match.service';
 import { FootballCroatiaDataSource, Match } from './football-croatia-datasource';
 
 @Component({
-  selector: 'app-football-croatia',
+  selector: 'football-croatia',
   templateUrl: './football-croatia.component.html',
   styleUrls: ['./football-croatia.component.css']
 })
