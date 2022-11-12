@@ -9,6 +9,7 @@ import { SpecialOfferComponent } from './special-offer/special-offer.component';
 const routes: Routes = 
 [
       //routes
+      { path: '', component: SpecialOfferComponent, data: { title: 'Football-England' } },      
       { path: 'football-england', component: FootballEnglandComponent, data: { title: 'Football-England' } },      
       { path: 'football-croatia', component: FootballCroatiaComponent, data: { title: 'Football-Croatia' } },      
       { path: 'football-spain', component: FootballSpainComponent, data: { title: 'Football-Spain' } },      

@@ -14,32 +14,32 @@
     <ng-container matColumnDef="homeWin">
       <th mat-header-cell *matHeaderCellDef>1</th>
       <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
-      <td mat-cell class="odds" *matCellDef="let row">{{row.homeWin | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betHomeWin(row)">{{row.homeWin | number : '.2-2'}}</td>
     </ng-container>
 
     <ng-container matColumnDef="draw">
       <th mat-header-cell *matHeaderCellDef>X</th>
-      <td mat-cell class="odds" *matCellDef="let row">{{row.draw | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betDraw(row)">{{row.draw | number : '.2-2'}}</td>
     </ng-container> 
 
     <ng-container matColumnDef="awayWin">
       <th mat-header-cell *matHeaderCellDef>2</th>
-      <td mat-cell class="odds" *matCellDef="let row">{{row.awayWin | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betAwayWin(row)">{{row.awayWin | number : '.2-2'}}</td>
     </ng-container> 
 
     <ng-container matColumnDef="homeOrDraw">
       <th mat-header-cell *matHeaderCellDef>1X</th>
-      <td mat-cell class="odds" *matCellDef="let row">{{row.homeOrDraw | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betHomeOrDraw(row)">{{row.homeOrDraw | number : '.2-2'}}</td>
     </ng-container> 
 
     <ng-container matColumnDef="awayOrDraw">
       <th mat-header-cell *matHeaderCellDef>X2</th>
-      <td mat-cell class="odds" *matCellDef="let row">{{row.awayOrDraw | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betAwayOrDraw(row)">{{row.awayOrDraw | number : '.2-2'}}</td>
     </ng-container> 
 
     <ng-container matColumnDef="homeOrAway">
       <th mat-header-cell *matHeaderCellDef>12</th>
-      <td mat-cell class="odds" *matCellDef="let row">{{row.homeOrAway | number : '.2-2'}}</td>
+      <td mat-cell class="odds" *matCellDef="let row" (click)="betHomeOrAway(row)">{{row.homeOrAway | number : '.2-2'}}</td>
     </ng-container> 
 
     <ng-container matColumnDef="matchDateTime">

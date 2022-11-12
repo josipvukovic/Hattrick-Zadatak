@@ -15,6 +15,7 @@ import { FootballCroatiaComponent } from './football-croatia/football-croatia.co
 import { FootballEnglandComponent } from './football-england/football-england.component';
 import { FootballSpainComponent } from './football-spain/football-spain.component';
 import { FootballItalyComponent } from './football-italy/football-italy.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FootballItalyComponent } from './football-italy/football-italy.componen
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
