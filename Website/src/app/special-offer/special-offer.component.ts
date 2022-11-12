@@ -20,6 +20,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   toggle = true;
   status = 'Enable';
   storedBets: Ticket [] = [];
+  showError = true;
   
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -35,7 +36,6 @@ export class SpecialOfferComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
-    sessionStorage.setItem("allowSpecialOffer", "1");
 
     this.getSpecialOfferMatches();
     this.getTicketData();
@@ -106,6 +106,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -114,11 +115,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 
@@ -177,6 +180,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -185,11 +189,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 
@@ -248,6 +254,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -256,11 +263,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 
@@ -319,6 +328,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -327,11 +337,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 
@@ -390,6 +402,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -398,11 +411,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 
@@ -461,6 +476,7 @@ export class SpecialOfferComponent implements AfterViewInit {
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
     }
     else {
+      this.showError = true;
       newStoredBets2.forEach(obj => { 
 
         if(obj.matchId === row.matchId){
@@ -469,11 +485,13 @@ export class SpecialOfferComponent implements AfterViewInit {
           duplicate = true;
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
           console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+          this.showError = false;
         }
       });
+      if(this.showError === true){
+        this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
+      }
+
     }
     
 

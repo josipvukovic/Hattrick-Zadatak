@@ -72,8 +72,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
 
-    if(allowSpecialOffer === '1'){
-
       if(newStoredBets2){
         newStoredBets2.forEach(obj => {
           if(obj.matchId === row.matchId){
@@ -104,23 +102,7 @@ export class FootballEnglandComponent implements AfterViewInit {
 
 
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.homeWin;
-          obj.bet = "1";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+         
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
@@ -147,8 +129,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
     console.log(allowSpecialOffer);
-
-    if(allowSpecialOffer === '1'){
 
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -179,23 +159,7 @@ export class FootballEnglandComponent implements AfterViewInit {
     
         
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.draw;
-          obj.bet = "X";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+     
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
@@ -222,8 +186,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
     console.log(allowSpecialOffer);
-
-    if(allowSpecialOffer === '1'){
 
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -254,23 +216,7 @@ export class FootballEnglandComponent implements AfterViewInit {
 
     
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.awayWin;
-          obj.bet = "2";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+   
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
@@ -297,8 +243,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
     console.log(allowSpecialOffer);
-
-    if(allowSpecialOffer === '1'){
 
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -329,23 +273,7 @@ export class FootballEnglandComponent implements AfterViewInit {
 
     
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.homeOrDraw;
-          obj.bet = "1X";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+       
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
@@ -372,8 +300,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
     console.log(allowSpecialOffer);
-
-    if(allowSpecialOffer === '1'){
 
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -404,23 +330,7 @@ export class FootballEnglandComponent implements AfterViewInit {
 
     
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.awayOrDraw;
-          obj.bet = "X2";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+  
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
@@ -447,8 +357,6 @@ export class FootballEnglandComponent implements AfterViewInit {
       specialOffer: 0
     }; 
     console.log(allowSpecialOffer);
-
-    if(allowSpecialOffer === '1'){
 
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -479,23 +387,7 @@ export class FootballEnglandComponent implements AfterViewInit {
 
     
         sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-    }
-    else {
-      newStoredBets2.forEach(obj => { 
-
-        if(obj.matchId === row.matchId){
-          obj.odd = row.homeOrAway;
-          obj.bet = "12";
-          duplicate = true;
-          sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
-          console.log("ELSE DUPLICATE!");
-        }
-        else{
-          this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
-        }
-      });
-    }
-    
+       
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
