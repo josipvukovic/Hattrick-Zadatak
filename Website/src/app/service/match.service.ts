@@ -43,12 +43,8 @@ export class MatchService {
   getFootballItaly(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetFootballItaly');
   }
-  
-  // getTicketMatches(): Observable<Ticket[]>{
-  //   return this.http.get<Ticket[]>(this.baseUrl + '/GetTicketMatches');
-  // }
 
-  // addTicketMatch(ticket: Ticket): Observable<Ticket>{
-  //   return this.http.post<Ticket>(this.baseUrl + '/AddTicketMatch', ticket);
-  // }
+  addTicket(ticket: Ticket): Observable<Ticket>{
+    return this.http.post<Ticket>(this.baseUrl + '/AddTicket', ticket);
+  }
 }

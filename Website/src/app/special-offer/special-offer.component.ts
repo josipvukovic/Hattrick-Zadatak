@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
-import { Ticket } from '../models/ticket.model';
+import { MatchDetails } from '../models/match-details.model';
 import { MatchService } from '../service/match.service';
 import { TicketService } from '../service/ticket.service';
 import { TicketComponent } from '../ticket/ticket.component';
@@ -21,14 +21,14 @@ export class SpecialOfferComponent implements AfterViewInit {
   dataSource: SpecialOfferDataSource;
   toggle = true;
   status = 'Enable';
-  storedBets: Ticket [] = [];
+  storedBets: MatchDetails [] = [];
   showError = true;
   
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
   // ticket: Ticket = new Ticket;
-  ticket = {} as Ticket
+  ticket = {} as MatchDetails
   
   constructor(private matchService: MatchService,private toastr: ToastrService, private ticketService: TicketService) {
     this.dataSource = new SpecialOfferDataSource();
@@ -54,7 +54,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   getTicketData(){
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -63,16 +63,17 @@ export class SpecialOfferComponent implements AfterViewInit {
   betHomeWin(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
     
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
+    console.log("allowSpecialOffer: ");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',
@@ -177,7 +178,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   betDraw(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -185,7 +186,7 @@ export class SpecialOfferComponent implements AfterViewInit {
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',
@@ -289,7 +290,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   betAwayWin(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -297,7 +298,7 @@ export class SpecialOfferComponent implements AfterViewInit {
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',
@@ -401,7 +402,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   betHomeOrDraw(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -409,7 +410,7 @@ export class SpecialOfferComponent implements AfterViewInit {
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',
@@ -513,7 +514,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   betAwayOrDraw(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -521,7 +522,7 @@ export class SpecialOfferComponent implements AfterViewInit {
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',
@@ -625,7 +626,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   betHomeOrAway(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -633,7 +634,7 @@ export class SpecialOfferComponent implements AfterViewInit {
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
 
-    var ticket: Ticket = {
+    var ticket: MatchDetails = {
       matchId: 0,
       competition: '',
       homeTeam: '',

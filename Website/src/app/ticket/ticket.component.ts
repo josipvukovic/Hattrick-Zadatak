@@ -2,7 +2,10 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { ToastrService } from 'ngx-toastr';
+import { MatchDetails } from '../models/match-details.model';
 import { Ticket } from '../models/ticket.model';
+import { MatchService } from '../service/match.service';
 import { TicketService } from '../service/ticket.service';
 import { TicketDataSource, TicketItem } from './ticket-datasource';
 
@@ -16,7 +19,7 @@ export class TicketComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<TicketItem>;
   dataSource!: TicketDataSource;
-  storedBets: Ticket [] = [];
+  storedBets: MatchDetails [] = [];
   // oddsTotal = sessionStorage.setItem("oddsTotal", '1.55');
   oddsTotal: number = 1;
   betAmount: number = 10;
@@ -26,7 +29,7 @@ export class TicketComponent implements AfterViewInit {
   displayedColumns = ['homeTeam', 'dash', 'awayTeam', 'bet', 'odd', 'removeMatch'];
   betColumns = [ 'oddsTotal', 'betAmount', 'winningAmount', 'submitTicket'];
 
-  constructor(private ticketService: TicketService) {
+  constructor(private ticketService: TicketService, private matchService: MatchService, private toastr: ToastrService) {
     this.dataSource = new TicketDataSource();
     this.ticketService.callToggle.subscribe(( data ) =>{
       this.getTicketData();
@@ -47,7 +50,7 @@ export class TicketComponent implements AfterViewInit {
   getTicketData(){
     console.log("getTicketData cALED!")
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
@@ -57,7 +60,7 @@ export class TicketComponent implements AfterViewInit {
     console.log(oddsTotal);
     this.oddsTotal = oddsTotal;
 
-    var  betAmountTemp = sessionStorage.getItem("betAmount");
+    var betAmountTemp = sessionStorage.getItem("betAmount");
     var betAmount = JSON.parse(betAmountTemp!);
     console.log("getTicketData()")
     console.log(oddsTotal);
@@ -80,6 +83,7 @@ export class TicketComponent implements AfterViewInit {
       betAmountTemp = sessionStorage.getItem("betAmount");
       betAmount = JSON.parse(betAmountTemp!);
       this.winningAmount = this.oddsTotal * (betAmount *= 1 - 0.05);
+      sessionStorage.setItem("winningAmount", JSON.stringify(this.winningAmount)); 
     });
 
     // input?.addEventListener('input', this.updateTicket);
@@ -88,18 +92,58 @@ export class TicketComponent implements AfterViewInit {
     // console.log(this.betAmount);
     // console.log(this.winningAmount);
     this.winningAmount = this.oddsTotal * (betAmount *= 1 - 0.05);
+    sessionStorage.setItem("winningAmount", JSON.stringify(this.winningAmount)); 
+
     // console.log(this.winningAmount);
 
   }
 
   submitTicket(){
-    console.log("submitTicket() called!")
+
+    var ticket: Ticket = {
+      matches: [],
+      oddsTotal: 0,
+      betAmount: 0,
+      winningAmount: 0
+    }; 
+
+    var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
+
+    var betsString = sessionStorage.getItem("ticketBets");
+    var bets: MatchDetails[] = JSON.parse(betsString!);
+    ticket.matches = bets;
+
+    var oddsTemp = sessionStorage.getItem("oddsTotal");
+    var oddsTotal = JSON.parse(oddsTemp!);
+    ticket.oddsTotal = oddsTotal;
+
+    var betAmountTemp = sessionStorage.getItem("betAmount");
+    var betAmount = JSON.parse(betAmountTemp!);
+    ticket.betAmount = betAmount;
+
+    var winningAmountTemp = sessionStorage.getItem("winningAmount");
+    var winningAmount = JSON.parse(winningAmountTemp!);
+    ticket.winningAmount = winningAmount.toFixed(2);
+
+    if(allowSpecialOffer == '0' && bets.length < 6){
+      this.toastr.error('Za kombinaciju s Top ponudom minimalan broj parova je 6!', 'Greška');
+    }
+    else{
+      this.matchService.addTicket(ticket)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      );
+      this.toastr.success('Listić je uplaćen!', '');
+    }
+
   }
 
   removeMatch(row: any){
     console.log(row);
     var newStoredBets = sessionStorage.getItem("ticketBets");
-    var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     
     console.log(newStoredBets2);
     if(newStoredBets2){
@@ -117,7 +161,7 @@ export class TicketComponent implements AfterViewInit {
           console.log(newStoredBets2);
           console.log(this.storedBets);
         }
-        if(obj.specialOffer == 2){
+        if(row.specialOffer == 2){
           sessionStorage.setItem("allowSpecialOffer", "1");
           console.log("specialOffer=2")
         }

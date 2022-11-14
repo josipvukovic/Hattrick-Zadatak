@@ -1,9 +1,9 @@
+import { MatchDetails } from "./match-details.model";
+
 export interface Ticket{
-    matchId: number;
-    competition: string;
-    homeTeam: string;
-    awayTeam: string;
-    bet: string;
-    odd: number;
-    specialOffer: number;
+    matches: MatchDetails[];
+    oddsTotal: number;
+    betAmount: number;
+    winningAmount: number;
+
 }
