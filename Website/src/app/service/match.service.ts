@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Match } from '../models/match.model';
 import { SpecialOffer } from '../models/special-offer.model';
+import { Ticket } from '../models/ticket.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,5 +42,13 @@ export class MatchService {
   // GET football Italy league matches
   getFootballItaly(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetFootballItaly');
-  }  
+  }
+  
+  // getTicketMatches(): Observable<Ticket[]>{
+  //   return this.http.get<Ticket[]>(this.baseUrl + '/GetTicketMatches');
+  // }
+
+  // addTicketMatch(ticket: Ticket): Observable<Ticket>{
+  //   return this.http.post<Ticket>(this.baseUrl + '/AddTicketMatch', ticket);
+  // }
 }

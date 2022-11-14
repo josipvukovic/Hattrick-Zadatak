@@ -16,6 +16,11 @@ import { FootballEnglandComponent } from './football-england/football-england.co
 import { FootballSpainComponent } from './football-spain/football-spain.component';
 import { FootballItalyComponent } from './football-italy/football-italy.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TicketComponent } from './ticket/ticket.component';
+import { MatIconModule } from '@angular/material/icon';
+import { TicketService } from './service/ticket.service';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +32,8 @@ import { ToastrModule } from 'ngx-toastr';
     FootballCroatiaComponent,
     FootballEnglandComponent,
     FootballSpainComponent,
-    FootballItalyComponent
+    FootballItalyComponent,
+    TicketComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +43,13 @@ import { ToastrModule } from 'ngx-toastr';
     MatPaginatorModule,
     MatSortModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatIconModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    TicketService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

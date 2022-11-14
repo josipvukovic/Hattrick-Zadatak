@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { Ticket } from '../models/ticket.model';
 import { MatchService } from '../service/match.service';
+import { TicketService } from '../service/ticket.service';
 import { FootballItalyDataSource, Match } from './football-italy-datasource';
 
 @Component({
@@ -23,7 +24,7 @@ export class FootballItalyComponent implements AfterViewInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
 
-  constructor(private matchService: MatchService, private toastr: ToastrService) {
+  constructor(private matchService: MatchService, private toastr: ToastrService, private ticketService: TicketService) {
     this.dataSource = new FootballItalyDataSource();
   }
 
@@ -57,6 +58,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -74,9 +78,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => {
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             obj.odd = row.homeWin;
             obj.bet = "1";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -85,16 +101,21 @@ export class FootballItalyComponent implements AfterViewInit {
         });
         } 
     
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "1";
-        ticket.odd = row.homeWin;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
-        
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "1";
+          ticket.odd = row.homeWin;
+          ticket.specialOffer = 1;
+
+          var oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+
           this.storedBets.push(ticket);
         };
         console.log(ticket);
@@ -106,7 +127,8 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
-    
+    this.ticketService.callToggle.next( true );
+
     this.toggle = !this.toggle;
   }
 
@@ -114,6 +136,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -132,9 +157,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             obj.odd = row.draw;
             obj.bet = "X";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -143,16 +180,21 @@ export class FootballItalyComponent implements AfterViewInit {
         });
         } 
     
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "X";
-        ticket.odd = row.draw;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
-        
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "X";
+          ticket.odd = row.draw;
+          ticket.specialOffer = 1;
+
+          var  oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+
           this.storedBets.push(ticket);
         }
     
@@ -163,7 +205,8 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
-    
+    this.ticketService.callToggle.next( true );
+
     this.toggle = !this.toggle;
   }
 
@@ -171,6 +214,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -189,9 +235,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             obj.odd = row.awayWin;
             obj.bet = "2";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -199,17 +257,22 @@ export class FootballItalyComponent implements AfterViewInit {
           }
         });
         } 
-    
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "2";
-        ticket.odd = row.awayWin;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
         
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "2";
+          ticket.odd = row.awayWin;
+          ticket.specialOffer = 1;
+  
+          var  oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+
           this.storedBets.push(ticket);
         }
 
@@ -220,6 +283,7 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
+    this.ticketService.callToggle.next( true );
 
     this.toggle = !this.toggle;
   }
@@ -228,6 +292,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -246,9 +313,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+            
             obj.odd = row.homeOrDraw;
             obj.bet = "1X";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -257,16 +336,21 @@ export class FootballItalyComponent implements AfterViewInit {
         });
         } 
     
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "1X";
-        ticket.odd = row.homeOrDraw;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
-        
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "1X";
+          ticket.odd = row.homeOrDraw;
+          ticket.specialOffer = 1;
+  
+          var  oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+
           this.storedBets.push(ticket);
         }
 
@@ -277,6 +361,7 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
+    this.ticketService.callToggle.next( true );
 
     this.toggle = !this.toggle;
   }
@@ -285,6 +370,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -303,9 +391,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             obj.odd = row.awayOrDraw;
             obj.bet = "X2";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -314,16 +414,22 @@ export class FootballItalyComponent implements AfterViewInit {
         });
         } 
     
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "X2";
-        ticket.odd = row.awayOrDraw;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
         
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "X2";
+          ticket.odd = row.awayOrDraw;
+          ticket.specialOffer = 1;
+  
+          var oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+
           this.storedBets.push(ticket);
         }
 
@@ -334,7 +440,8 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
-    
+    this.ticketService.callToggle.next( true );
+
     this.toggle = !this.toggle;
   }
 
@@ -342,6 +449,9 @@ export class FootballItalyComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: Ticket[] = JSON.parse(newStoredBets!);
+    if(newStoredBets2){
+      this.storedBets = newStoredBets2;
+    }
     var duplicate = false;
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     console.log(allowSpecialOffer);
@@ -360,9 +470,21 @@ export class FootballItalyComponent implements AfterViewInit {
       if(newStoredBets2){
         newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
           if(obj.matchId === row.matchId){
+
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal /= obj.odd;
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             obj.odd = row.homeOrAway;
             obj.bet = "12";
             duplicate = true;
+
+            oddsTemp = sessionStorage.getItem("oddsTotal");
+            oddsTotal = JSON.parse(oddsTemp!);
+            oddsTotal *= obj.odd
+            sessionStorage.setItem("oddsTotal", oddsTotal);
+
             console.log("DUPLICATE!");
             if(newStoredBets2){
               this.storedBets = newStoredBets2;
@@ -370,17 +492,22 @@ export class FootballItalyComponent implements AfterViewInit {
           }
         });
         } 
-    
-        ticket.matchId = row.matchId;
-        ticket.competition = row.competition;
-        ticket.homeTeam = row.homeTeam;
-        ticket.awayTeam = row.awayTeam;
-        ticket.bet = "12";
-        ticket.odd = row.homeOrAway;
-        ticket.specialOffer = 1;
-        // sessionStorage.setItem("allowSpecialOffer", "0");
-        
+            
         if(duplicate == false){
+
+          ticket.matchId = row.matchId;
+          ticket.competition = row.competition;
+          ticket.homeTeam = row.homeTeam;
+          ticket.awayTeam = row.awayTeam;
+          ticket.bet = "12";
+          ticket.odd = row.homeOrAway;
+          ticket.specialOffer = 1;
+  
+          var  oddsTemp = sessionStorage.getItem("oddsTotal");
+          var oddsTotal = JSON.parse(oddsTemp!);
+          oddsTotal *= ticket.odd
+          sessionStorage.setItem("oddsTotal", oddsTotal);
+          
           this.storedBets.push(ticket);
         }
 
@@ -391,7 +518,8 @@ export class FootballItalyComponent implements AfterViewInit {
     var newStoredBets = sessionStorage.getItem("ticketBets");
     newStoredBets2 = JSON.parse(newStoredBets!);
     console.log(newStoredBets2)
-    
+    this.ticketService.callToggle.next( true );
+
     this.toggle = !this.toggle;
   }
 }

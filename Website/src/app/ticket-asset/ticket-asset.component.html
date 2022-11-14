@@ -1,5 +1,33 @@
 <div class="ticket-container">
     <div class="tab">Listić</div>
+    <table mat-table class="data-table" matSort aria-label="Elements">
+
+        <ng-container matColumnDef="homeTeam">
+          <th mat-header-cell *matHeaderCellDef="let displayedColumns">Hajduk</th>
+          <td mat-cell class="teamName" *matCellDef="let row">{{row.homeTeam}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="awayTeam">
+          <th mat-header-cell *matHeaderCellDef>Dinamo</th>
+          <td mat-cell class="teamName" *matCellDef="let row">{{row.awayTeam}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="homeWin">
+          <th mat-header-cell *matHeaderCellDef>1</th>
+          <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
+          <td mat-cell class="odds" *matCellDef="let row">{{row.bet | number : '.2-2'}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="homeWin">
+            <th mat-header-cell *matHeaderCellDef>1</th>
+            <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
+            <td mat-cell class="odds" *matCellDef="let row">{{row.odd | number : '.2-2'}}</td>
+          </ng-container>
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
     <div class="ticket-body-content">
         <div class="ticket-bet">Istra 1961 - HNK Gorica  1 - 2.80</div>
         <div class="bet-description">Osnovna ponuda</div>

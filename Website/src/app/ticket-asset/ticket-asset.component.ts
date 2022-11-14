@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TicketAssetComponent implements OnInit {
 
+  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
+  displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
+
   constructor() { }
 
   ngOnInit(): void {
