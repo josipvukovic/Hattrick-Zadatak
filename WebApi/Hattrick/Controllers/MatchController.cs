@@ -1,4 +1,5 @@
 ﻿using Hattrick.Data;
+using Hattrick.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -84,6 +85,29 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
+       // GET ticket 
+       [HttpGet]
+       [Route("GetTickets")]
+       [ActionName("GetTickets")]
+        public async Task<IActionResult> GetTickets()
+        {
+            var tickets = await hattrickDbContext.Ticket.ToListAsync();
+            var matches = await hattrickDbContext.MatchDetails.ToListAsync();
 
+            return Ok(tickets);
+        }
+
+        // Create new ticket
+        [HttpPost]
+        [Route("AddTicket")]
+        public async Task<IActionResult> AddTicket([FromBody] Ticket ticket)
+        {
+            //ticket.TicketId = Guid.NewGuid();
+
+            await hattrickDbContext.Ticket.AddAsync(ticket);
+            await hattrickDbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTickets), ticket.TicketId, ticket);
+        }
     }
 }
