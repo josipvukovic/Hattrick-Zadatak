@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8">
   <table mat-table class="mat-table" matSort aria-label="Elements">
-    <!-- Id Column -->
+
     <ng-container matColumnDef="homeTeam">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">{{row.homeTeam}}</td>
@@ -11,19 +11,16 @@
       <td mat-cell *matCellDef="let row">-</td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="awayTeam">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">{{row.awayTeam}}</td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="bet">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">{{row.bet }}</td>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="odd">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
       <td mat-cell *matCellDef="let row">{{row.odd | number : '.2-2'}}</td>
@@ -39,6 +36,7 @@
   </table>
 
   <table table class="mat-table" matSort aria-label="Elements">
+
     <ng-container matColumnDef="oddsTotal">
       <th class="oddsTotal" mat-header-cell mat-sort-header>Tečaj</th>
       <td mat-cell >{{ oddsTotal | number : '.2-2'}}</td>
@@ -47,7 +45,6 @@
     <ng-container matColumnDef="betAmount">
       <th class="betAmountHeader" mat-header-cell mat-sort-header>Uplata(kn)</th>
       <input matInput class="betAmount" placeholder="iznos" [(ngModel)]="betAmount" id="betAmount" name="betAmount">
-      <!-- <td mat-cell >10</td> -->
     </ng-container>
 
     <ng-container matColumnDef="winningAmount">
