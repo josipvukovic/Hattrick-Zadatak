@@ -36,11 +36,7 @@ export class SubmittedTicketsComponent implements AfterViewInit {
     this.matchService.getTickets()
     .subscribe(
       response => {
-        console.log('getTickets()')
         this.table.dataSource = response;
-        console.log(this.table.dataSource)
-
-        // this.matchTable = this.table.dataSource;
       }
     );
   }
