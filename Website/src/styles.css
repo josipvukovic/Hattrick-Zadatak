@@ -44,3 +44,7 @@ a:focus {
 a:hover, a:active { 
     text-decoration: none; color:black 
 }
+
+.mat-cell:empty:after {
+    content: "-"; 
+}

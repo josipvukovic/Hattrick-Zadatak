@@ -13,17 +13,17 @@
 
     <ng-container matColumnDef="toAccount">
       <th mat-header-cell *matHeaderCellDef>Na račun</th>
-      <td mat-cell class="toAccount" *matCellDef="let row">{{row.toAccount | number : '.2-2'}}</td>
+      <td mat-cell class="toAccount" *matCellDef="let row">{{row.toAccount | number : '.2-2'}} kn</td>
     </ng-container>
 
     <ng-container matColumnDef="fromAccount">
       <th mat-header-cell *matHeaderCellDef>S računa</th>
-      <td mat-cell class="fromAccount" *matCellDef="let row">{{row.fromAccount | number : '.2-2'}}</td>
+      <td mat-cell class="fromAccount" *matCellDef="let row">{{row.fromAccount | number : '.2-2'}} kn</td>
     </ng-container> 
 
     <ng-container matColumnDef="availableAmount">
       <th mat-header-cell *matHeaderCellDef>Trenutni iznos računa</th>
-      <td mat-cell class="availableAmount" *matCellDef="let row">{{row.availableAmount | number : '.2-2'}}</td>
+      <td mat-cell class="availableAmount" *matCellDef="let row">{{row.availableAmount | number : '.2-2'}} kn</td>
     </ng-container> 
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
