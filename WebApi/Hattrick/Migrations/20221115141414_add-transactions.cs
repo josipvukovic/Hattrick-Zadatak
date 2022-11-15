@@ -31,7 +31,7 @@ namespace Hattrick.Migrations
                    INSERT INTO 
                     HattrickDb.dbo.Transactions 
                    VALUES
-                    (GETDATE(), 'INITIAL-DEPOSIT', 100, 0, 100) 
+                    (GETDATE(), 'INICIJALNA - UPLATA', 100, 0, 100) 
                ");
         }
 
