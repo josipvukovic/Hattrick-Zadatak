@@ -44,6 +44,12 @@ export class MatchService {
     return this.http.get<Match[]>(this.baseUrl + '/GetFootballItaly');
   }
 
+  // GET tickets
+  getTickets(): Observable<Ticket[]>{
+    return this.http.get<Ticket[]>(this.baseUrl + '/GetTickets');
+  }
+
+  // Submit ticket
   addTicket(ticket: Ticket): Observable<Ticket>{
     return this.http.post<Ticket>(this.baseUrl + '/AddTicket', ticket);
   }

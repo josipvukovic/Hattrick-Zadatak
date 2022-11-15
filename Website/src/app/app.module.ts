@@ -20,6 +20,8 @@ import { TicketComponent } from './ticket/ticket.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TicketService } from './service/ticket.service';
 import { FormsModule } from '@angular/forms';
+import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { FormsModule } from '@angular/forms';
     FootballEnglandComponent,
     FootballSpainComponent,
     FootballItalyComponent,
-    TicketComponent
+    TicketComponent,
+    SubmittedTicketsComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule
   ],
   providers: [
     TicketService

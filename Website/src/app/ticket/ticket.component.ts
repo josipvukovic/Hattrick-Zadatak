@@ -101,6 +101,7 @@ export class TicketComponent implements AfterViewInit {
   submitTicket(){
 
     var ticket: Ticket = {
+      ticketId: 0,
       matches: [],
       oddsTotal: 0,
       betAmount: 0,
