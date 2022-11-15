@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Match } from '../models/match.model';
 import { SpecialOffer } from '../models/special-offer.model';
 import { Ticket } from '../models/ticket.model';
+import { Transaction } from '../models/transaction.model';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +53,15 @@ export class MatchService {
   // Submit ticket
   addTicket(ticket: Ticket): Observable<Ticket>{
     return this.http.post<Ticket>(this.baseUrl + '/AddTicket', ticket);
+  }
+
+  // GET transactions
+  getTransactions(): Observable<Transaction[]>{
+    return this.http.get<Transaction[]>(this.baseUrl + '/GetTransactions');
+  }
+
+  // Submit ticket
+  addTransaction(transaction: Transaction): Observable<Transaction>{
+    return this.http.post<Transaction>(this.baseUrl + '/AddTransaction', transaction);
   }
 }

@@ -6,6 +6,7 @@ import { FootballItalyComponent } from './football-italy/football-italy.componen
 import { FootballSpainComponent } from './football-spain/football-spain.component';
 import { SpecialOfferComponent } from './special-offer/special-offer.component';
 import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets.component';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 const routes: Routes = 
 [
@@ -16,7 +17,8 @@ const routes: Routes =
       { path: 'football-spain', component: FootballSpainComponent, data: { title: 'Football-Spain' } },      
       { path: 'football-italy', component: FootballItalyComponent, data: { title: 'Football-Italy' } },      
       { path: 'special-offer', component: SpecialOfferComponent, data: { title: 'Special-Offer' } },      
-      { path: 'submitted-tickets', component: SubmittedTicketsComponent, data: { title: 'Listići' } },      
+      { path: 'submitted-tickets', component: SubmittedTicketsComponent, data: { title: 'Listići' } },     
+      { path: 'transactions', component: TransactionsComponent, data: { title: 'Listići' } },       
 ];
 
 @NgModule({

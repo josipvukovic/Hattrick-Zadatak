@@ -22,6 +22,7 @@ import { TicketService } from './service/ticket.service';
 import { FormsModule } from '@angular/forms';
 import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { TransactionsComponent } from './transactions/transactions.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FootballSpainComponent,
     FootballItalyComponent,
     TicketComponent,
-    SubmittedTicketsComponent
+    SubmittedTicketsComponent,
+    TransactionsComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { MatchDetails } from '../models/match-details.model';
 import { Ticket } from '../models/ticket.model';
+import { Transaction } from '../models/transaction.model';
 import { MatchService } from '../service/match.service';
 import { TicketService } from '../service/ticket.service';
 import { TicketDataSource, TicketItem } from './ticket-datasource';
@@ -24,6 +25,7 @@ export class TicketComponent implements AfterViewInit {
   oddsTotal: number = 1;
   betAmount: number = 10;
   winningAmount: number = 0;
+  availableAmount: number = 0;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'dash', 'awayTeam', 'bet', 'odd', 'removeMatch'];
@@ -47,6 +49,7 @@ export class TicketComponent implements AfterViewInit {
       sessionStorage.setItem("oddsTotal", '1');
     }
 
+    this.getAvailableAmount();
     this.getTicketData();
   }
 
@@ -91,14 +94,6 @@ export class TicketComponent implements AfterViewInit {
 
   submitTicket(){
 
-    var ticket: Ticket = {
-      ticketId: 0,
-      matches: [],
-      oddsTotal: 0,
-      betAmount: 0,
-      winningAmount: 0
-    }; 
-
     var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
 
     var betsString = sessionStorage.getItem("ticketBets");
@@ -118,6 +113,8 @@ export class TicketComponent implements AfterViewInit {
     var winningAmount = JSON.parse(winningAmountTemp!);
     ticket.winningAmount = winningAmount.toFixed(2);
 
+    this.getAvailableAmount();
+
     //if Special offer tip is added minimum number of tips is 6
     if(allowSpecialOffer == '0' && bets.length < 6){      
       this.toastr.error('Za kombinaciju s Top ponudom minimalan broj parova je 6!', 'Greška');
@@ -130,6 +127,9 @@ export class TicketComponent implements AfterViewInit {
     else if(!ticket.betAmount || ticket.betAmount < 5){     
       this.toastr.error('Minimalan ulog je 5 kn!', 'Greška');
     }
+    else if(ticket.betAmount > this.availableAmount){
+      this.toastr.error('Nedovoljno novca na računu!', 'Greška');
+    }
     //Submit ticket
     else {    
       this.matchService.addTicket(ticket)
@@ -138,6 +138,17 @@ export class TicketComponent implements AfterViewInit {
           console.log(response);
         }
       );
+
+      transaction.dateTime = new Date;
+      transaction.fromAccount = ticket.betAmount;
+      transaction.transaction = 'UPLATA LISTIĆA';
+      transaction.availableAmount = this.availableAmount - ticket.betAmount;
+      this.matchService.addTransaction(transaction)
+      .subscribe(
+        response => {
+          console.log(response);
+        }
+      )
       this.toastr.success('Listić je uplaćen!', '');
     }
 
@@ -168,4 +179,33 @@ export class TicketComponent implements AfterViewInit {
       });
       } 
   }
+
+  getAvailableAmount(){
+
+    this.matchService.getTransactions()
+    .subscribe(
+      response => {
+        this.availableAmount = response[response.length-1].availableAmount;
+        sessionStorage.setItem("availableAmount", this.availableAmount.toString());
+      }
+    );
+  }
+
 }
+
+var ticket: Ticket = {
+  ticketId: 0,
+  matches: [],
+  oddsTotal: 0,
+  betAmount: 0,
+  winningAmount: 0
+}; 
+
+var transaction: Transaction = {
+  transactionId: 0,
+  dateTime: new Date,
+  transaction: '',
+  toAccount: 0,
+  fromAccount: 0,
+  availableAmount: 0
+};
