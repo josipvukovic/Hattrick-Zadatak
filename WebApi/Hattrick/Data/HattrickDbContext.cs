@@ -14,5 +14,7 @@ namespace Hattrick.Data
         public DbSet<SpecialOffer> SpecialOffer{ get; set; }
         public DbSet<Ticket> Ticket { get; set; }
         public DbSet<MatchDetails> MatchDetails { get; set; }
+        public DbSet<Transactions> Transactions { get; set; }
+
     }
 }

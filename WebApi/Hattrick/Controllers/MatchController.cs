@@ -97,7 +97,7 @@ namespace Hattrick.Controllers
             return Ok(tickets);
         }
 
-        // Create new ticket
+        // POST ticket
         [HttpPost]
         [Route("AddTicket")]
         public async Task<IActionResult> AddTicket([FromBody] Ticket ticket)
@@ -108,6 +108,29 @@ namespace Hattrick.Controllers
             await hattrickDbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTickets), ticket.TicketId, ticket);
+        }
+
+        // GET all transactions
+        [HttpGet]
+        [Route("GetTransactions")]
+        [ActionName("GetTransactions")]
+        public async Task<IActionResult> GetTransactions()
+        {
+            var transactions = await hattrickDbContext.Transactions.ToListAsync();
+
+            return Ok(transactions);
+        }
+
+        // POST transaction
+        [HttpPost]
+        [Route("AddTransaction")]
+        public async Task<IActionResult> AddTransaction([FromBody] Transactions transaction)
+        {
+
+            await hattrickDbContext.Transactions.AddAsync(transaction);
+            await hattrickDbContext.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTickets), transaction.TransactionId, transaction);
         }
     }
 }
