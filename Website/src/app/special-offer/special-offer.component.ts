@@ -25,7 +25,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
-  // ticket: Ticket = new Ticket;
+
   ticket = {} as MatchDetails
   
   constructor(private matchService: MatchService,private toastr: ToastrService, private ticketService: TicketService) {
@@ -185,6 +185,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
       console.log(allowSpecialOffer);
@@ -200,7 +201,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       }; 
       console.log(allowSpecialOffer);
   
-      if(allowSpecialOffer === '1'){
+      if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -214,13 +215,13 @@ export class SpecialOfferComponent implements AfterViewInit {
               obj.odd = row.draw;
               obj.bet = "X";
               obj.specialOffer = 2;
+              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              duplicate = true;
               this.toastr.success('Zamjena', '');
               console.log("DUPLICATE!");
             }
@@ -235,7 +236,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             ticket.awayTeam = row.awayTeam;
             ticket.bet = "X";
             ticket.odd = row.draw;
-            ticket.specialOffer = 1;
+            ticket.specialOffer = 2;
             sessionStorage.setItem("allowSpecialOffer", "0");
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -313,7 +314,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       }; 
       console.log(allowSpecialOffer);
   
-      if(allowSpecialOffer === '1'){
+      if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -327,13 +328,13 @@ export class SpecialOfferComponent implements AfterViewInit {
               obj.odd = row.awayWin;
               obj.bet = "2";
               obj.specialOffer = 2;
+              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              duplicate = true;
               this.toastr.success('Zamjena', '');
               console.log("DUPLICATE!");
             }
@@ -348,7 +349,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             ticket.awayTeam = row.awayTeam;
             ticket.bet = "2";
             ticket.odd = row.awayWin;
-            ticket.specialOffer = 1;
+            ticket.specialOffer = 2;
             sessionStorage.setItem("allowSpecialOffer", "0");
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -426,7 +427,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       }; 
       console.log(allowSpecialOffer);
   
-      if(allowSpecialOffer === '1'){
+      if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -440,13 +441,13 @@ export class SpecialOfferComponent implements AfterViewInit {
               obj.odd = row.homeOrDraw;
               obj.bet = "1X";
               obj.specialOffer = 2;
+              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              duplicate = true;
               this.toastr.success('Zamjena', '');
               console.log("DUPLICATE!");
             }
@@ -461,7 +462,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             ticket.awayTeam = row.awayTeam;
             ticket.bet = "1X";
             ticket.odd = row.homeOrDraw;
-            ticket.specialOffer = 1;
+            ticket.specialOffer = 2;
             sessionStorage.setItem("allowSpecialOffer", "0");
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -540,7 +541,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       }; 
       console.log(allowSpecialOffer);
   
-      if(allowSpecialOffer === '1'){
+      if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -554,13 +555,13 @@ export class SpecialOfferComponent implements AfterViewInit {
               obj.odd = row.awayOrDraw;
               obj.bet = "X2";
               obj.specialOffer = 2;
+              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              duplicate = true;
               this.toastr.success('Zamjena', '');
               console.log("DUPLICATE!");
             }
@@ -575,7 +576,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             ticket.awayTeam = row.awayTeam;
             ticket.bet = "X2";
             ticket.odd = row.awayOrDraw;
-            ticket.specialOffer = 1;
+            ticket.specialOffer = 2;
             sessionStorage.setItem("allowSpecialOffer", "0");
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -655,7 +656,7 @@ export class SpecialOfferComponent implements AfterViewInit {
       }; 
       console.log(allowSpecialOffer);
   
-      if(allowSpecialOffer === '1'){
+      if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
@@ -669,13 +670,13 @@ export class SpecialOfferComponent implements AfterViewInit {
               obj.odd = row.homeOrAway;
               obj.bet = "12";
               obj.specialOffer = 2;
+              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              duplicate = true;
               this.toastr.success('Zamjena', '');
               console.log("DUPLICATE!");
             }
@@ -690,7 +691,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             ticket.awayTeam = row.awayTeam;
             ticket.bet = "12";
             ticket.odd = row.homeOrAway;
-            ticket.specialOffer = 1;
+            ticket.specialOffer = 2;
             sessionStorage.setItem("allowSpecialOffer", "0");
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
