@@ -106,7 +106,7 @@ namespace Hattrick.Controllers
         // GET Wimbledon
         [HttpGet]
         [Route("GetTennisWimbledon")]
-        public async Task<IActionResult> GetBasketballWimbledon()
+        public async Task<IActionResult> GetTennisWimbledon()
         {
             var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Wimbledon")).ToListAsync();
             return Ok(matches);
@@ -115,7 +115,7 @@ namespace Hattrick.Controllers
         // GET ATPUmag
         [HttpGet]
         [Route("GetTennisATPUmag")]
-        public async Task<IActionResult> GetBasketballATPUmag()
+        public async Task<IActionResult> GetTennisATPUmag()
         {
             var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("ATP Umag")).ToListAsync();
             return Ok(matches);
