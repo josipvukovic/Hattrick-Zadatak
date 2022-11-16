@@ -138,7 +138,6 @@ namespace Hattrick.Controllers
         [Route("AddTicket")]
         public async Task<IActionResult> AddTicket([FromBody] Ticket ticket)
         {
-            //ticket.TicketId = Guid.NewGuid();
 
             await hattrickDbContext.Ticket.AddAsync(ticket);
             await hattrickDbContext.SaveChangesAsync();
