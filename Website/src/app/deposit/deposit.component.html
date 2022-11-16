@@ -1,0 +1,7 @@
+<form class="deposit-form" [formGroup]="formData" (ngSubmit)="onSubmit(formData.value)">
+    <fieldset class="fieldset">
+      <legend class="legend">Uplata na račun</legend>
+      <input type="text" formControlName="depositAmount" placeholder="iznos...">
+      <button type="submit" class="btn">UPLATI</button>
+    </fieldset>
+  </form>

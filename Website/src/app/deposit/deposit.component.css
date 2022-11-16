@@ -1,0 +1,12 @@
+.deposit-form {
+    width: 40%;
+    margin: auto;
+}
+
+.fieldset {
+    border-width: 1px;
+}
+
+.legend {
+    font-weight: 500;
+}

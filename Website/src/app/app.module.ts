@@ -19,10 +19,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { TicketComponent } from './ticket/ticket.component';
 import { MatIconModule } from '@angular/material/icon';
 import { TicketService } from './service/ticket.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsComponent } from './transactions/transactions.component';
+import { DepositComponent } from './deposit/deposit.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     FootballItalyComponent,
     TicketComponent,
     SubmittedTicketsComponent,
-    TransactionsComponent
+    TransactionsComponent,
+    DepositComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { TransactionsComponent } from './transactions/transactions.component';
     ToastrModule.forRoot(),
     MatIconModule,
     FormsModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [
     TicketService

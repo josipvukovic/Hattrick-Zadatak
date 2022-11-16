@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DepositComponent } from './deposit/deposit.component';
 import { FootballCroatiaComponent } from './football-croatia/football-croatia.component';
 import { FootballEnglandComponent } from './football-england/football-england.component';
 import { FootballItalyComponent } from './football-italy/football-italy.component';
@@ -19,6 +20,7 @@ const routes: Routes =
       { path: 'special-offer', component: SpecialOfferComponent, data: { title: 'Special-Offer' } },      
       { path: 'submitted-tickets', component: SubmittedTicketsComponent, data: { title: 'Listići' } },     
       { path: 'transactions', component: TransactionsComponent, data: { title: 'Listići' } },       
+      { path: 'deposit', component: DepositComponent, data: { title: 'Uplata' } },       
 ];
 
 @NgModule({
