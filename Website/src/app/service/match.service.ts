@@ -64,4 +64,21 @@ export class MatchService {
   addTransaction(transaction: Transaction): Observable<Transaction>{
     return this.http.post<Transaction>(this.baseUrl + '/AddTransaction', transaction);
   }
+
+  //GET NBA
+  getBasketballNBA(): Observable<Match[]>{
+    return this.http.get<Match[]>(this.baseUrl + '/GetBasketballNBA');
+  }
+
+  getBasketballEuroleague(): Observable<Match[]>{
+    return this.http.get<Match[]>(this.baseUrl + '/GetBasketballEuroleague');
+  }
+
+  getTennisWimbledon(): Observable<Match[]>{
+    return this.http.get<Match[]>(this.baseUrl + '/GetTennisWimbledon');
+  }
+
+  getTennisATPUmag(): Observable<Match[]>{
+    return this.http.get<Match[]>(this.baseUrl + '/GetTennisATPUmag');
+  }
 }

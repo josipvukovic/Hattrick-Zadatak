@@ -1,0 +1,81 @@
+.data-table{
+  /* width: 100%; */
+  width: 58%;
+  margin: auto;
+}
+
+.mat-elevation-z8{
+  /* margin: auto;
+  margin-left: 15px;
+  box-shadow: none; */
+  margin: auto;
+  margin-left: 445px;
+  box-shadow: none;
+  margin-right: -130px;
+}
+
+.odds:hover {
+  background-color: rgb(212, 212, 212);
+  cursor: pointer;
+}
+
+.mat-header-cell{
+  text-align: center;
+  padding-top: 15px;
+}
+
+.mat-header-row {
+  height: 40px;
+}
+
+.odds{
+  text-align: center;
+}
+
+.matchDate:hover {
+  background-color: rgb(255, 255, 255);
+  cursor:text;
+  text-align: center;
+}
+
+.matchDate {
+  text-align: center;
+  font-size: 13px !important;
+  background-color: #f0f0f0;
+
+}
+
+.mat-cell {
+  font-size: 14px;
+  min-height: 48px;
+  /* min-width: 100px; */
+  text-align: center;
+  border-right: 1px solid rgb(216, 216, 216);
+}
+
+.mat-row{
+  height: 30px;
+}
+
+.teamName{
+  background-color: #f0f0f0;
+  font-size: 13px;
+  min-width: 104px;
+  max-width: 104px;
+}
+
+.teamName:hover{
+  background-color: rgb(255, 255, 255);
+}
+
+.green {
+  background-color: rgb(255, 255, 255);
+}
+
+.red {
+  background-color: blue;
+}
+
+.odds:active{
+  background-color: blue;
+}

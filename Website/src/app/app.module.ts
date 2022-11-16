@@ -24,6 +24,10 @@ import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { TransactionsComponent } from './transactions/transactions.component';
 import { DepositComponent } from './deposit/deposit.component';
+import { BasketballNbaComponent } from './basketball-nba/basketball-nba.component';
+import { BasketballEuroleagueComponent } from './basketball-euroleague/basketball-euroleague.component';
+import { TennisWimbledonComponent } from './tennis-wimbledon/tennis-wimbledon.component';
+import { TennisAtpUmagComponent } from './tennis-atp-umag/tennis-atp-umag.component';
 
 
 @NgModule({
@@ -40,7 +44,11 @@ import { DepositComponent } from './deposit/deposit.component';
     TicketComponent,
     SubmittedTicketsComponent,
     TransactionsComponent,
-    DepositComponent
+    DepositComponent,
+    BasketballNbaComponent,
+    BasketballEuroleagueComponent,
+    TennisWimbledonComponent,
+    TennisAtpUmagComponent
   ],
   imports: [
     BrowserModule,

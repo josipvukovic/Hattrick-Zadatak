@@ -1,7 +1,7 @@
 .left-row{
     display: grid;
     margin-left: 230px;
-    margin-bottom: -505px;}
+    margin-bottom: -645px;}
 
 .ad-img{
     float: left;
@@ -28,6 +28,7 @@
 .side-menu-item{
   margin-top: 5px;
   place-self: center;
+  color: #5c5c5c;
 }
 
 .side-menu-title{
@@ -37,4 +38,7 @@
   margin-top: 5px;
   font-weight: 600;
   margin-left: 5px;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: #cecece;
 }
