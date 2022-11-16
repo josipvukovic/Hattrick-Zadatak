@@ -1,4 +1,4 @@
-.mat-elevation-z8{
+.mat-elevation-z8 {
   width: 15%;
   margin: auto;
   float: right;
@@ -10,40 +10,48 @@
   width: 100%;
 }
 
+.mat-table-top {
+  margin-top: -23px;
+}
+
 .mat-cell {
   color: white;
   font-size: 12px;
   text-align: center;
 }
 
-.removeMatchButton{
+.removeMatchButton {
   background: #19457a;
   border-style: none;
   cursor: pointer;
 }
 
-.removeBtnCell{
+.removeBtnCell {
   padding-right: 15px !important;
 }
 
-.betAmount{
+.betAmount {
   width: 65% !important;
 }
 
-.winningAmount{
+.winningAmount {
   color: white;
-  display: table-row;
+  display: inline-block;
 }
 
-.oddsTotal{
+.winningAmountCell {
+  display: inline-block;
+}
+
+.oddsTotal {
   color: white;
 }
 
-.betAmountHeader{
+.betAmountHeader {
   color: white;
 }
 
-.submitTicket{
+.submitTicket {
   display: table-row;
   background-color: #19457a;
   color: #888ca0;
@@ -51,4 +59,21 @@
   border-style: solid;
   border-width: 1px;
   cursor: pointer;
+  margin-left: 2em;
+  margin-bottom: 3px;
+}
+
+.title-container {
+  text-align: center;
+  background-color: #19457a;
+  color:white;
+  height: 5px;
+  margin-top: 18px;
+}
+
+.title {
+  text-align: center;
+  background-color: #19457a;
+  color:white;
+  height: 1px;
 }

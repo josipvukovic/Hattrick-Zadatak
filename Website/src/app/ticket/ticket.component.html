@@ -1,5 +1,8 @@
 <div class="mat-elevation-z8">
-  <table mat-table class="mat-table" matSort aria-label="Elements">
+  <div class="title-container">
+    <span class="title">LISTIĆ</span>
+  </div>
+  <table mat-table class="mat-table mat-table-top" matSort aria-label="Elements">
 
     <ng-container matColumnDef="homeTeam">
       <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
@@ -49,7 +52,7 @@
 
     <ng-container matColumnDef="winningAmount">
       <th class="winningAmount" mat-header-cell mat-sort-header>Dobitak</th>
-      <td mat-cell >{{ winningAmount | number : '.2-2'}}</td>
+      <td mat-cell class="winningAmountCell">{{ winningAmount | number : '.2-2'}} kn</td>
     </ng-container>
 
     <ng-container matColumnDef="submitTicket">
