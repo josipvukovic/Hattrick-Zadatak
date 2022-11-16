@@ -85,10 +85,46 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-       // GET ticket 
-       [HttpGet]
-       [Route("GetTickets")]
-       [ActionName("GetTickets")]
+        // GET NBA
+        [HttpGet]
+        [Route("GetBasketballNBA")]
+        public async Task<IActionResult> GetBasketballNBA()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("NBA")).ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET Euroleague
+        [HttpGet]
+        [Route("GetBasketballEuroleague")]
+        public async Task<IActionResult> GetBasketballEuroleague()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Euroleague")).ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET Wimbledon
+        [HttpGet]
+        [Route("GetTennisWimbledon")]
+        public async Task<IActionResult> GetBasketballWimbledon()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Wimbledon")).ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET ATPUmag
+        [HttpGet]
+        [Route("GetTennisATPUmag")]
+        public async Task<IActionResult> GetBasketballATPUmag()
+        {
+            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("ATP Umag")).ToListAsync();
+            return Ok(matches);
+        }
+
+        // GET submited tickets 
+        [HttpGet]
+        [Route("GetTickets")]
+        [ActionName("GetTickets")]
         public async Task<IActionResult> GetTickets()
         {
             var tickets = await hattrickDbContext.Ticket.ToListAsync();
