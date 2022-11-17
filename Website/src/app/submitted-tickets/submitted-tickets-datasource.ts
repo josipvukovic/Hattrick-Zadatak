@@ -25,18 +25,13 @@ export interface MatchDetailsItem {
   matchOutcome: string;
 }
 
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: SubmittedTicketsItem[] = [
-  // {ticketId: 1, oddsTotal: 5.65, betAmount: 100, winningAmount: 501.00 },
-];
-
 /**
  * Data source for the SubmittedTickets view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class SubmittedTicketsDataSource extends DataSource<SubmittedTicketsItem> {
-  data: SubmittedTicketsItem[] = EXAMPLE_DATA;
+  data: SubmittedTicketsItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 

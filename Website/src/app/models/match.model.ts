@@ -1,4 +1,5 @@
-export interface Match{
+export interface Match {
+
     matchId: number;
     competition: string;
     homeTeam: string;
@@ -12,4 +13,5 @@ export interface Match{
     matchDateTime: string;
     specialOffer: number;
     matchOutcome: string;
+    
 }

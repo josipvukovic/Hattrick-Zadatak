@@ -2,7 +2,7 @@
 @import '~ngx-toastr/toastr';
 
 /* You can add global styles to this file, and also import other style files */
-body, html{
+body, html {
     padding:0;
     margin:0;
 }
@@ -17,15 +17,15 @@ body {
     background-color: #D4D5D6;
 }
 
-.mat-sort-header-container{
+.mat-sort-header-container { 
     place-content: center;
-  }
+}
 
-  .mat-paginator {
+.mat-paginator {
     display: none !important;
 }
 
-a{
+a {
     text-decoration: none;
 }
 

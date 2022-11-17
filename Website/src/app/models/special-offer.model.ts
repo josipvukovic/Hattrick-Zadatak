@@ -1,4 +1,5 @@
-export interface SpecialOffer{
+export interface SpecialOffer {
+
     matchId: number;
     competition: string;
     homeTeam: string;
@@ -10,4 +11,5 @@ export interface SpecialOffer{
     awayOrDraw: number;
     homeOrAway: number;
     matchDateTime: string;
+    
 }

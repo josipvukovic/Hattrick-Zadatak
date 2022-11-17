@@ -57,9 +57,11 @@ export class TicketComponent implements AfterViewInit {
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
     if(newStoredBets2){
       this.storedBets = newStoredBets2;
     }
+
     var oddsTemp = sessionStorage.getItem("oddsTotal");
     var oddsTotal = JSON.parse(oddsTemp!);
     this.oddsTotal = oddsTotal;
@@ -67,15 +69,14 @@ export class TicketComponent implements AfterViewInit {
     var betAmountTemp = sessionStorage.getItem("betAmount");
     if(!betAmountTemp) {betAmountTemp = '0'};
     var betAmount = JSON.parse(betAmountTemp!);
-    this.betAmount = betAmount;
 
+    this.betAmount = betAmount;
     this.table.dataSource = this.storedBets;
 
     const input = document.getElementById('betAmount') as HTMLInputElement | null;
 
     input?.addEventListener('input', function (event) {
       const target = event.target as HTMLInputElement;
-      console.log(target.value);
       sessionStorage.setItem("betAmount", target.value); 
     });
 
@@ -160,8 +161,11 @@ export class TicketComponent implements AfterViewInit {
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
     
     if(newStoredBets2){
+
       newStoredBets2.forEach(obj => { 
+
         if(obj.matchId === row.matchId){
+          
           newStoredBets2.splice(newStoredBets2.indexOf(obj), 1);
           sessionStorage.setItem("ticketBets", JSON.stringify(newStoredBets2));
 

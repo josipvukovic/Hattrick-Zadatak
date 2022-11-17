@@ -1,13 +1,9 @@
-.data-table{
-  /* width: 100%; */
+.data-table {
   width: 58%;
   margin: auto;
 }
 
-.mat-elevation-z8{
-  /* margin: auto;
-  margin-left: 15px;
-  box-shadow: none; */
+.mat-elevation-z8 {
   margin: auto;
   margin-left: 445px;
   box-shadow: none;
@@ -19,7 +15,7 @@
   cursor: pointer;
 }
 
-.mat-header-cell{
+.mat-header-cell {
   text-align: center;
   padding-top: 15px;
 }
@@ -28,7 +24,7 @@
   height: 40px;
 }
 
-.odds{
+.odds {
   text-align: center;
 }
 
@@ -53,18 +49,18 @@
   border-right: 1px solid rgb(216, 216, 216);
 }
 
-.mat-row{
+.mat-row {
   height: 30px;
 }
 
-.teamName{
+.teamName {
   background-color: #f0f0f0;
   font-size: 13px;
   min-width: 104px;
   max-width: 104px;
 }
 
-.teamName:hover{
+.teamName:hover {
   background-color: rgb(255, 255, 255);
 }
 
@@ -76,6 +72,6 @@
   background-color: blue;
 }
 
-.odds:active{
+.odds:active {
   background-color: blue;
 }

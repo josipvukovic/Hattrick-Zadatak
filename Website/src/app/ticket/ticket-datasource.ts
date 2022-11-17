@@ -11,21 +11,13 @@ export interface TicketItem {
   bet: string;
   odd: number;
 }
-
-// TODO: replace this with real data from your application
-const EXAMPLE_DATA: TicketItem[] = [
-  {homeTeam: 'Hajduk', awayTeam: 'Dinamo', bet: '1', odd: 1.50},
-  {homeTeam: 'Šibenik', awayTeam: 'Gorica', bet: '2', odd: 2.60},
-
-];
-
 /**
  * Data source for the Ticket view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
 export class TicketDataSource extends DataSource<TicketItem> {
-  data: TicketItem[] = EXAMPLE_DATA;
+  data: TicketItem[] = [];
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 

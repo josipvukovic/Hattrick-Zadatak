@@ -70,14 +70,17 @@ export class MatchService {
     return this.http.get<Match[]>(this.baseUrl + '/GetBasketballNBA');
   }
 
+  //GET Euroleague
   getBasketballEuroleague(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetBasketballEuroleague');
   }
 
+  //Get Wimbledon
   getTennisWimbledon(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetTennisWimbledon');
   }
 
+  //Get ATP Umag
   getTennisATPUmag(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetTennisATPUmag');
   }

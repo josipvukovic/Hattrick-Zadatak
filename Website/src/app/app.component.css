@@ -1,9 +1,9 @@
-.left-row{
+.left-row {
     display: grid;
     margin-left: 230px;
     margin-bottom: -645px;}
 
-.ad-img{
+.ad-img {
     float: left;
 }
 
@@ -11,12 +11,12 @@
     margin-top: 20px;
   }
 
-.table{
+.table {
   float: left;
   width: 50%;
 }
 
-.side-menu{
+.side-menu {
   width: 215px;
   display: grid;
   background-color: white;
@@ -25,13 +25,13 @@
   font-weight: 500;
 }
 
-.side-menu-item{
+.side-menu-item {
   margin-top: 5px;
   place-self: center;
   color: #5c5c5c;
 }
 
-.side-menu-title{
+.side-menu-title {
   font-size: 12px;
   color: #4254a7;
   margin-bottom: 3px;

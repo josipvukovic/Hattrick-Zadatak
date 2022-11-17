@@ -60,28 +60,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
   
         if(newStoredBets2){
+
           newStoredBets2.forEach(obj => {
+
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -91,14 +83,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.homeWin;
               obj.bet = "1";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              console.log("DUPLICATE!");
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
+              
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };
@@ -124,13 +117,12 @@ export class FootballSpainComponent implements AfterViewInit {
   
             this.storedBets.push(ticket);
           };
-          console.log(ticket);
   
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -142,29 +134,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
-      console.log(allowSpecialOffer);
   
         if(newStoredBets2){
-          newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
+
+          newStoredBets2.forEach(obj => {
+            
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -174,14 +157,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.draw;
               obj.bet = "X";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              console.log("DUPLICATE!");
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
+
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };   
@@ -212,7 +196,7 @@ export class FootballSpainComponent implements AfterViewInit {
       
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -224,29 +208,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
-      console.log(allowSpecialOffer);
   
         if(newStoredBets2){
-          newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
+
+          newStoredBets2.forEach(obj => { 
+            
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -256,14 +231,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.awayWin;
               obj.bet = "2";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              console.log("DUPLICATE!");
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
+
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };
@@ -294,7 +270,7 @@ export class FootballSpainComponent implements AfterViewInit {
       
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -306,29 +282,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
-      console.log(allowSpecialOffer);
   
         if(newStoredBets2){
-          newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
+
+          newStoredBets2.forEach(obj => { 
+            
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -338,14 +305,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.homeOrDraw;
               obj.bet = "1X";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
+
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
   
-              console.log("DUPLICATE!");
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };
@@ -364,7 +332,7 @@ export class FootballSpainComponent implements AfterViewInit {
             ticket.specialOffer = 1;
             ticket.matchOutcome = row.matchOutcome;
 
-            var  oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
             sessionStorage.setItem("oddsTotal", oddsTotal);
@@ -376,7 +344,7 @@ export class FootballSpainComponent implements AfterViewInit {
      
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -388,28 +356,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
   
         if(newStoredBets2){
-          newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
+
+          newStoredBets2.forEach(obj => { 
+            
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -419,14 +379,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.awayOrDraw;
               obj.bet = "X2";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              console.log("DUPLICATE!");
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
+
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };
@@ -457,7 +418,7 @@ export class FootballSpainComponent implements AfterViewInit {
   
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -469,29 +430,20 @@ export class FootballSpainComponent implements AfterViewInit {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
     else {
+
       var newStoredBets = sessionStorage.getItem("ticketBets");
       var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
+
       if(newStoredBets2){
         this.storedBets = newStoredBets2;
       }
+
       var duplicate = false;
-      var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
-      console.log(allowSpecialOffer);
-  
-      var ticket: MatchDetails = {
-        matchId: 0,
-        competition: '',
-        homeTeam: '',
-        awayTeam: '',
-        bet: '',
-        odd: 0,
-        specialOffer: 0,
-        matchOutcome: ''
-      }; 
-      console.log(allowSpecialOffer);
   
         if(newStoredBets2){
-          newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
+
+          newStoredBets2.forEach(obj => { 
+            
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -501,14 +453,15 @@ export class FootballSpainComponent implements AfterViewInit {
   
               obj.odd = row.homeOrAway;
               obj.bet = "12";
-              duplicate = true;
   
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
               sessionStorage.setItem("oddsTotal", oddsTotal);
   
-              console.log("DUPLICATE!");
+              duplicate = true;
+              this.toastr.success('Zamjena', '');
+
               if(newStoredBets2){
                 this.storedBets = newStoredBets2;
               };
@@ -527,7 +480,7 @@ export class FootballSpainComponent implements AfterViewInit {
             ticket.specialOffer = 1;
             ticket.matchOutcome = row.matchOutcome;
 
-            var  oddsTemp = sessionStorage.getItem("oddsTotal");
+            var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
             sessionStorage.setItem("oddsTotal", oddsTotal);
@@ -539,9 +492,20 @@ export class FootballSpainComponent implements AfterViewInit {
      
       var newStoredBets = sessionStorage.getItem("ticketBets");
       newStoredBets2 = JSON.parse(newStoredBets!);
-      console.log(newStoredBets2)
+
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
   }
 }
+
+var ticket: MatchDetails = {
+  matchId: 0,
+  competition: '',
+  homeTeam: '',
+  awayTeam: '',
+  bet: '',
+  odd: 0,
+  specialOffer: 0,
+  matchOutcome: ''
+}; 

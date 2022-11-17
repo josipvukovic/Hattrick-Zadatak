@@ -13,7 +13,6 @@
 
     <ng-container matColumnDef="homeWin">
       <th mat-header-cell *matHeaderCellDef>1</th>
-      <!-- <td mat-cell class="odds" [ngClass]="{'green' : toggle, 'red': !toggle}" *matCellDef="let row" (click)="doAlert()">{{row.homeWin | number : '.2-2'}}</td> -->
       <td mat-cell class="odds" *matCellDef="let row" (click)="betHomeWin(row)">{{row.homeWin | number : '.2-2'}}</td>
     </ng-container>
 
@@ -47,7 +46,6 @@
       <td mat-cell class="matchDate"*matCellDef="let row">{{row.matchDateTime}}</td>
     </ng-container> 
 
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -60,18 +58,3 @@
       aria-label="Select page">
   </mat-paginator>
 </div>
-
-
-<!-- <script>
-var app = angular.module("app", []);
-
-app.controller("myCtrl", function($scope) {
-
-  $scope.selectPosition = function($parentIndex, $index) {
-    $scope.selectedPosition = {
-      parent: $parentIndex,
-      index: $index
-    };
-  }
-})
-</script> -->

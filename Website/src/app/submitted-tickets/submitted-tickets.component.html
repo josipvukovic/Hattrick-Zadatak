@@ -47,9 +47,11 @@
             <ng-container matColumnDef="matchOutcome" >
               <th mat-header-cell class="inner-table-header" *matHeaderCellDef mat-sort-header></th>
               <td mat-cell class="matchCell" *matCellDef="let element">
+
                 <button *ngIf="!element.matchOutcome" class="outcomePending"color="warn"><mat-icon>query_builder</mat-icon></button>
                 <button *ngIf="element.bet.includes(element.matchOutcome)" class="outcomeSuccess"color="warn"><mat-icon>check_circle</mat-icon></button>
                 <button *ngIf="element.matchOutcome && !element.bet.includes(element.matchOutcome)" class="outcomeFail"color="warn"><mat-icon>remove_circle</mat-icon></button>
+
               </td>
             </ng-container>
 
@@ -75,7 +77,3 @@
   </mat-paginator>
 </div>
 
-<!-- <script type="text/javascript">
-  var betValue = document.getElementById('betValue').value;
-  console.log("betValue" + betValue);
-</script> -->

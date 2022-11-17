@@ -1,4 +1,5 @@
-export interface MatchDetails{
+export interface MatchDetails {
+
     matchId: number;
     competition: string;
     homeTeam: string;
@@ -7,4 +8,5 @@ export interface MatchDetails{
     odd: number;
     specialOffer: number;
     matchOutcome: string;
+    
 }
