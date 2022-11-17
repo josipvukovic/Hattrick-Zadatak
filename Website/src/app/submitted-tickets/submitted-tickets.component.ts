@@ -19,7 +19,7 @@ export class SubmittedTicketsComponent implements AfterViewInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['ticketId', 'oddsTotal', 'betAmount', 'winningAmount'];
-  matchDetailColumns = ['competition', 'homeTeam', 'awayTeam', 'bet', 'odd'];
+  matchDetailColumns = ['competition', 'homeTeam', 'awayTeam', 'bet', 'odd', 'matchOutcome'];
 
   constructor(private matchService: MatchService) {
     this.dataSource = new SubmittedTicketsDataSource();

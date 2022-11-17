@@ -76,7 +76,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
   
   
@@ -115,7 +116,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "1";
             ticket.odd = row.homeWin;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
@@ -163,7 +165,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
       console.log(allowSpecialOffer);
   
@@ -204,7 +207,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "X";
             ticket.odd = row.draw;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var  oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
@@ -248,7 +252,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
       console.log(allowSpecialOffer);
   
@@ -291,7 +296,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "2";
             ticket.odd = row.awayWin;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var  oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
@@ -336,7 +342,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
       console.log(allowSpecialOffer);
   
@@ -377,7 +384,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "1X";
             ticket.odd = row.homeOrDraw;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var  oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
@@ -422,7 +430,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
       console.log(allowSpecialOffer);
   
@@ -463,7 +472,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "X2";
             ticket.odd = row.awayOrDraw;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd
@@ -509,7 +519,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
       console.log(allowSpecialOffer);
   
@@ -550,7 +561,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             ticket.bet = "12";
             ticket.odd = row.homeOrAway;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var  oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd

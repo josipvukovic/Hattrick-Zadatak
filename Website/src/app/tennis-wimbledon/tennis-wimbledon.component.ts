@@ -76,7 +76,8 @@ export class TennisWimbledonComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
   
         if(newStoredBets2){
@@ -114,6 +115,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
             ticket.bet = "1";
             ticket.odd = row.homeWin;
             ticket.specialOffer = 1;
+            ticket.matchOutcome = row.matchOutcome;
     
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
@@ -157,7 +159,8 @@ export class TennisWimbledonComponent implements AfterViewInit {
         awayTeam: '',
         bet: '',
         odd: 0,
-        specialOffer: 0
+        specialOffer: 0,
+        matchOutcome: ''
       }; 
   
         if(newStoredBets2){
@@ -196,7 +199,8 @@ export class TennisWimbledonComponent implements AfterViewInit {
             ticket.bet = "2";
             ticket.odd = row.awayWin;
             ticket.specialOffer = 1;
-    
+            ticket.matchOutcome = row.matchOutcome;
+
             var  oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= ticket.odd

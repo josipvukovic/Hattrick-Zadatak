@@ -6,4 +6,5 @@ export interface MatchDetails{
     bet: string;
     odd: number;
     specialOffer: number;
+    matchOutcome: string;
 }

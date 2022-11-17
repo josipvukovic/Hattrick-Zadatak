@@ -22,6 +22,7 @@ export interface MatchDetailsItem {
   bet: string;
   odd: number;
   specialOffer: number;
+  matchOutcome: string;
 }
 
 // TODO: replace this with real data from your application

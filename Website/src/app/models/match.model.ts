@@ -11,4 +11,5 @@ export interface Match{
     homeOrAway: number;
     matchDateTime: string;
     specialOffer: number;
+    matchOutcome: string;
 }
