@@ -28,6 +28,7 @@ import { BasketballNbaComponent } from './basketball-nba/basketball-nba.componen
 import { BasketballEuroleagueComponent } from './basketball-euroleague/basketball-euroleague.component';
 import { TennisWimbledonComponent } from './tennis-wimbledon/tennis-wimbledon.component';
 import { TennisAtpUmagComponent } from './tennis-atp-umag/tennis-atp-umag.component';
+import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { TennisAtpUmagComponent } from './tennis-atp-umag/tennis-atp-umag.compon
     BasketballNbaComponent,
     BasketballEuroleagueComponent,
     TennisWimbledonComponent,
-    TennisAtpUmagComponent
+    TennisAtpUmagComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

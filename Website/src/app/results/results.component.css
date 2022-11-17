@@ -42,10 +42,12 @@
 }
 
 .mat-cell {
-  font-size: 14px;
+  font-size: 13px;
   min-height: 48px;
   text-align: center;
   border-right: 1px solid rgb(216, 216, 216);
+  color: #19457a;
+  font-weight: 500;
 }
 
 .mat-row {

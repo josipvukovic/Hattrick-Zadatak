@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatchOutcome } from '../models/match-outcome.model';
 import { Match } from '../models/match.model';
 import { SpecialOffer } from '../models/special-offer.model';
 import { Ticket } from '../models/ticket.model';
@@ -83,5 +84,10 @@ export class MatchService {
   //Get ATP Umag
   getTennisATPUmag(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetTennisATPUmag');
+  }
+
+  // Update match outcome for selected match
+  updateMatchOutcome(match: MatchOutcome): Observable<MatchOutcome>{
+    return this.http.put<MatchOutcome>(this.baseUrl + '/UpdateMatchOutcome', match);
   }
 }

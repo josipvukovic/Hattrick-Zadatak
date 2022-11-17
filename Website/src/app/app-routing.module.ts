@@ -7,6 +7,7 @@ import { FootballCroatiaComponent } from './football-croatia/football-croatia.co
 import { FootballEnglandComponent } from './football-england/football-england.component';
 import { FootballItalyComponent } from './football-italy/football-italy.component';
 import { FootballSpainComponent } from './football-spain/football-spain.component';
+import { ResultsComponent } from './results/results.component';
 import { SpecialOfferComponent } from './special-offer/special-offer.component';
 import { SubmittedTicketsComponent } from './submitted-tickets/submitted-tickets.component';
 import { TennisAtpUmagComponent } from './tennis-atp-umag/tennis-atp-umag.component';
@@ -29,6 +30,7 @@ const routes: Routes =
       { path: 'basketball-nba', component: BasketballNbaComponent, data: { title: 'NBA' } },       
       { path: 'tennis-wimbledon', component: TennisWimbledonComponent, data: { title: 'Wimbledon' } },       
       { path: 'tennis-atp-umag', component: TennisAtpUmagComponent, data: { title: 'ATP Umag' } },       
+      { path: 'results', component: ResultsComponent, data: { title: 'Rezults' } },       
 ];
 
 @NgModule({
