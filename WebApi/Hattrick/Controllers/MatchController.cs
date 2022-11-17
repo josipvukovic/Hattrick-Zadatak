@@ -18,8 +18,7 @@ namespace Hattrick.Controllers
             this.hattrickDbContext = hattrickDbContext;
         }
 
-
-        // GET all matches
+        //GET all matches
         [HttpGet]
         public async Task<IActionResult> GetAllMatches()
         {
@@ -27,7 +26,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET match by Id
+        //GET match by Id
         [HttpGet]
         [Route("{id}")]
         public async Task<IActionResult> GetMatch([FromRoute] int id)
@@ -40,7 +39,7 @@ namespace Hattrick.Controllers
             return NotFound("Match not found");
         }
 
-        // GET special offer matches
+        //GET special offer matches
         [HttpGet]
         [Route("GetSpecialOffer")]
         public async Task<IActionResult> GetSpecialOfferMatches()
@@ -49,7 +48,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET Croatian league 
+        //GET Croatian league 
         [HttpGet]
         [Route("GetFootballCroatia")]
         public async Task<IActionResult> GetFootballCroatia()
@@ -58,7 +57,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET English league
+        //GET English league
         [HttpGet]
         [Route("GetFootballEngland")]
         public async Task<IActionResult> GetFootballEngland()
@@ -67,7 +66,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
        
-        // GET Spanish league 
+        //GET Spanish league 
         [HttpGet]
         [Route("GetFootballSpain")]
         public async Task<IActionResult> GetFootballSpain()
@@ -76,7 +75,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
         
-        // GET Italian league
+        //GET Italian league
         [HttpGet]
         [Route("GetFootballItaly")]
         public async Task<IActionResult> GetFootballItaly()
@@ -85,7 +84,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET NBA
+        //GET NBA
         [HttpGet]
         [Route("GetBasketballNBA")]
         public async Task<IActionResult> GetBasketballNBA()
@@ -94,7 +93,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET Euroleague
+        //GET Euroleague
         [HttpGet]
         [Route("GetBasketballEuroleague")]
         public async Task<IActionResult> GetBasketballEuroleague()
@@ -103,7 +102,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET Wimbledon
+        //GET Wimbledon
         [HttpGet]
         [Route("GetTennisWimbledon")]
         public async Task<IActionResult> GetTennisWimbledon()
@@ -112,7 +111,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET ATPUmag
+        //GET ATP Umag
         [HttpGet]
         [Route("GetTennisATPUmag")]
         public async Task<IActionResult> GetTennisATPUmag()
@@ -121,7 +120,7 @@ namespace Hattrick.Controllers
             return Ok(matches);
         }
 
-        // GET submited tickets 
+        //GET submited tickets 
         [HttpGet]
         [Route("GetTickets")]
         [ActionName("GetTickets")]
@@ -133,7 +132,7 @@ namespace Hattrick.Controllers
             return Ok(tickets);
         }
 
-        // POST ticket
+        //POST ticket
         [HttpPost]
         [Route("AddTicket")]
         public async Task<IActionResult> AddTicket([FromBody] Ticket ticket)
@@ -145,7 +144,7 @@ namespace Hattrick.Controllers
             return CreatedAtAction(nameof(GetTickets), ticket.TicketId, ticket);
         }
 
-        // GET all transactions
+        //GET all transactions
         [HttpGet]
         [Route("GetTransactions")]
         [ActionName("GetTransactions")]
@@ -156,7 +155,7 @@ namespace Hattrick.Controllers
             return Ok(transactions);
         }
 
-        // POST transaction
+        //POST transaction
         [HttpPost]
         [Route("AddTransaction")]
         public async Task<IActionResult> AddTransaction([FromBody] Transactions transaction)
@@ -166,6 +165,32 @@ namespace Hattrick.Controllers
             await hattrickDbContext.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetTickets), transaction.TransactionId, transaction);
+        }
+
+        //Update Match outcome by matchId
+        [HttpPut]
+        [Route("UpdateMatchOutcome")]
+        public async Task<IActionResult> UpdateMatchOutcome([FromBody] Match match)
+        {
+            //update MatchOutcome field in Match table
+            var item = await hattrickDbContext.Match.FirstOrDefaultAsync(m => m.MatchId == match.MatchId);
+            if(item != null)
+            {
+                item.MatchOutcome = match.MatchOutcome;
+                await hattrickDbContext.SaveChangesAsync();
+            }
+            //update all MatchOutcome fields for MatchId in MatchDetails table
+            var matches = await hattrickDbContext.MatchDetails.Where(m => m.MatchId == match.MatchId).ToListAsync();
+            if(matches != null)
+            {
+                foreach(var element in matches)
+                {
+                    element.MatchOutcome = match.MatchOutcome;
+                    await hattrickDbContext.SaveChangesAsync();
+                }
+            }
+
+            return CreatedAtAction(nameof(GetAllMatches), match);
         }
     }
 }
