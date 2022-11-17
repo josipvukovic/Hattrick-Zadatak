@@ -10,7 +10,7 @@ namespace Hattrick.Data
         //Clean the table and reinsert the data everytime the app is started so we have the latest tips which are stored inside \BettingData\Data.xlsx
         public static string InsertDataQuery = "TRUNCATE TABLE HattrickDb.dbo.Match " +
                                                "SET IDENTITY_INSERT HattrickDb.dbo.Match " +
-                                               "ON INSERT INTO HattrickDb.dbo.Match(MatchId, Competition, HomeTeam ,AwayTeam, HomeWin, Draw, AwayWin, HomeOrDraw, AwayOrDraw, HomeOrAway, MatchDateTime, SpecialOffer) " +
+                                               "ON INSERT INTO HattrickDb.dbo.Match(MatchId, Competition, HomeTeam ,AwayTeam, HomeWin, Draw, AwayWin, HomeOrDraw, AwayOrDraw, HomeOrAway, MatchDateTime, SpecialOffer, MatchOutcome) " +
                                                "SELECT * FROM OPENROWSET('Microsoft.ACE.OLEDB.12.0', 'Excel 12.0;Database=" + Environment.CurrentDirectory + "\\BettingData\\Data.xlsx;HDR=YES', 'SELECT * FROM [DATA$]')";
 
         public static string InsertSpecialOffer = "TRUNCATE TABLE HattrickDb.dbo.SpecialOffer " +

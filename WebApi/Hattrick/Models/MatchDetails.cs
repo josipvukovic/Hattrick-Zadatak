@@ -13,5 +13,6 @@ namespace Hattrick.Models
         public string Bet { get; set; }
         public decimal Odd { get; set; }
         public int SpecialOffer { get; set; }
+        public string? MatchOutcome { get; set; }
     }
 }
