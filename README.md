@@ -13,24 +13,21 @@ When you run the app you can see 5 tabs:
 
 SPORT - You can choose your bets on different leagues and sports, and also one match from Special offer
 
-![image](https://user-images.githubusercontent.com/36126641/202662416-258c6762-24c6-4e5c-bbdf-089f84ce55e3.png)
+![image](https://user-images.githubusercontent.com/36126641/202663420-14b40d5c-d4db-4140-830a-9a57df89062c.png)
 
 
 LISTIĆI - Shows your submitted tickets
 
-![image](https://user-images.githubusercontent.com/36126641/202662728-2ba52140-1531-46c6-b5ba-aa2f25b70419.png)
-
+![image](https://user-images.githubusercontent.com/36126641/202663479-2cc2b80f-4da9-4f4e-b91f-6da2450c40e1.png)
 
 TRANSAKCIJE - Show all account transactions ( deposit, ticket submitted etc)
 
-![image](https://user-images.githubusercontent.com/36126641/202662801-62972efc-6701-4c9e-aabc-07644d6015ee.png)
-
+![image](https://user-images.githubusercontent.com/36126641/202663552-04d8589c-957e-4fe0-91b3-2427c597de43.png)
 
 UPLATA - You can deposit money into your account
 
-![image](https://user-images.githubusercontent.com/36126641/202662857-c9515776-efde-4332-98fd-ba67ed21cf5f.png)
-
+![image](https://user-images.githubusercontent.com/36126641/202663608-a1d9c695-26a8-4dba-9ac7-c7ed06c5ec0a.png)
 
 REZULTATI - You can choose match outcome for all the matches
 
-![image](https://user-images.githubusercontent.com/36126641/202662937-1e8c0a68-01ef-4e15-9ecd-ff1dfed15eea.png)
+![image](https://user-images.githubusercontent.com/36126641/202663665-f3f5678f-f524-47e8-8360-7248d54b6a9e.png)
