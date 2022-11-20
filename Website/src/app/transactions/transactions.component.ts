@@ -26,17 +26,16 @@ export class TransactionsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
 
     this.getTransactions();
   }
 
+  //GET data and populate data table with response
   getTransactions(){
     this.matchService.getTransactions()
     .subscribe(
       response => {
         this.table.dataSource = response;
-        console.log(response);
       }
     );
   }

@@ -28,10 +28,11 @@ export class SubmittedTicketsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+
     this.getTickets();
   }
 
+  //Get tickets from DB
   getTickets(){
     this.matchService.getTickets()
     .subscribe(

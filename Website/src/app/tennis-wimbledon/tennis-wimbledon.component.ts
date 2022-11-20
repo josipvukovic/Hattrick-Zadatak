@@ -31,12 +31,12 @@ export class TennisWimbledonComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
 
     this.getTennisWimbledon();
     this.getTicketData();
   }
 
+  //GET data and populate data table with response
   getTennisWimbledon(){
     this.matchService.getTennisWimbledon()
     .subscribe(
@@ -46,8 +46,8 @@ export class TennisWimbledonComponent implements AfterViewInit {
     );
   }
 
+  //GET current ticket data from session
   getTicketData(){
-
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
 
@@ -58,6 +58,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
 
   betHomeWin(row: any){
 
+    //Check if bet is forbidden
     if(row.homeWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -76,8 +77,10 @@ export class TennisWimbledonComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => {
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
 
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -86,6 +89,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
               obj.odd = row.homeWin;
               obj.bet = "1";
               
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -101,6 +105,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
           });
           } 
                 
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -121,11 +126,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
           };
   
       sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-  
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
-      
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -133,6 +134,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
 
   betAwayWin(row: any){
 
+    //Check if bet is forbidden
     if(row.awayWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -151,8 +153,10 @@ export class TennisWimbledonComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => { 
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -162,6 +166,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
               obj.bet = "2";
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -176,6 +181,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
           });
           } 
             
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -196,9 +202,6 @@ export class TennisWimbledonComponent implements AfterViewInit {
           }
       
       sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-        
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -206,6 +209,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
   }
 }
 
+//initialize ticket object
 var ticket: MatchDetails = {
   matchId: 0,
   competition: '',

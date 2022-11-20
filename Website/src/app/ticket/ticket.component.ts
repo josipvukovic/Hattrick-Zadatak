@@ -53,6 +53,7 @@ export class TicketComponent implements AfterViewInit {
     this.getTicketData();
   }
 
+  //Get all the ticket data
   getTicketData(){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
@@ -62,10 +63,12 @@ export class TicketComponent implements AfterViewInit {
       this.storedBets = newStoredBets2;
     }
 
+    //Get odds total from session storage
     var oddsTemp = sessionStorage.getItem("oddsTotal");
     var oddsTotal = JSON.parse(oddsTemp!);
     this.oddsTotal = oddsTotal;
 
+    //Get betting amount from session storage
     var betAmountTemp = sessionStorage.getItem("betAmount");
     if(!betAmountTemp) {betAmountTemp = '0'};
     var betAmount = JSON.parse(betAmountTemp!);
@@ -75,11 +78,13 @@ export class TicketComponent implements AfterViewInit {
 
     const input = document.getElementById('betAmount') as HTMLInputElement | null;
 
+    //Listen for changes on bet amount input field
     input?.addEventListener('input', function (event) {
       const target = event.target as HTMLInputElement;
       sessionStorage.setItem("betAmount", target.value); 
     });
 
+    //Calculate winning amount on input change
     input?.addEventListener('input', i => {
       betAmountTemp = sessionStorage.getItem("betAmount");
       if(!betAmountTemp) {betAmountTemp = '0'};
@@ -155,6 +160,7 @@ export class TicketComponent implements AfterViewInit {
 
   }
 
+  //Remove match from ticket
   removeMatch(row: any){
 
     var newStoredBets = sessionStorage.getItem("ticketBets");
@@ -184,8 +190,8 @@ export class TicketComponent implements AfterViewInit {
       } 
   }
 
+  //Get available amount 
   getAvailableAmount(){
-
     this.matchService.getTransactions()
     .subscribe(
       response => {
@@ -197,6 +203,7 @@ export class TicketComponent implements AfterViewInit {
 
 }
 
+//Initialize ticket object
 var ticket: Ticket = {
   ticketId: 0,
   matches: [],
@@ -205,6 +212,7 @@ var ticket: Ticket = {
   winningAmount: 0
 }; 
 
+//Initialize transaction object
 var transaction: Transaction = {
   transactionId: 0,
   dateTime: new Date,

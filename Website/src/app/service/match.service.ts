@@ -66,22 +66,22 @@ export class MatchService {
     return this.http.post<Transaction>(this.baseUrl + '/AddTransaction', transaction);
   }
 
-  //GET NBA
+  // GET NBA
   getBasketballNBA(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetBasketballNBA');
   }
 
-  //GET Euroleague
+  // GET Euroleague
   getBasketballEuroleague(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetBasketballEuroleague');
   }
 
-  //Get Wimbledon
+  // Get Wimbledon
   getTennisWimbledon(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetTennisWimbledon');
   }
 
-  //Get ATP Umag
+  // Get ATP Umag
   getTennisATPUmag(): Observable<Match[]>{
     return this.http.get<Match[]>(this.baseUrl + '/GetTennisATPUmag');
   }

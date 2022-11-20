@@ -31,12 +31,12 @@ export class FootballCroatiaComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
     
     this.getFootballCroatia();
     this.getTicketData();
   }
 
+  //GET data and populate data table with response
   getFootballCroatia(){
     this.matchService.getFootballCroatia()
     .subscribe(
@@ -46,6 +46,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
     );
   }
 
+  //GET current ticket data from session
   getTicketData(){
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
@@ -56,6 +57,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betHomeWin(row: any){
 
+    //Check if bet is forbidden
     if(row.homeWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -74,8 +76,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => {
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
 
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -84,6 +88,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.odd = row.homeWin;
               obj.bet = "1";
               
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -99,6 +104,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
           });
           } 
                 
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -118,11 +124,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }; 
   
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
-
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -130,6 +133,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.draw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -148,8 +152,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => { 
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -158,6 +164,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.odd = row.draw;
               obj.bet = "X";
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -172,7 +179,8 @@ export class FootballCroatiaComponent implements AfterViewInit {
             }
           });
           } 
-                    
+                 
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -192,10 +200,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }
           
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));    
-  
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));    
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -205,6 +210,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betAwayWin(row: any){
 
+    //Check if bet is forbidden
     if(row.awayWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -223,8 +229,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => { 
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -234,6 +242,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.bet = "2";
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -247,6 +256,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
           });
           } 
             
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -266,10 +276,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }
       
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-      
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -278,6 +285,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betHomeOrDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.homeOrDraw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -296,8 +304,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => { 
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -306,6 +316,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.odd = row.homeOrDraw;
               obj.bet = "1X";
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -321,6 +332,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
           });
           } 
                 
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -340,11 +352,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }
   
-      
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-  
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -353,6 +361,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betAwayOrDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.awayOrDraw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -371,8 +380,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => { console.log("MatchId: " + obj.matchId)
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -381,6 +392,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.odd = row.awayOrDraw;
               obj.bet = "X2";
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -396,6 +408,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
           });
           } 
                
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -415,10 +428,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }
       
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -428,6 +438,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
   betHomeOrAway(row: any){
 
+    //Check if bet is forbidden
     if(row.homeOrAway == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -446,8 +457,10 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
           newStoredBets2.forEach(obj => {
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
               
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -456,6 +469,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
               obj.odd = row.homeOrAway;
               obj.bet = "12";
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -471,6 +485,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
           });
           } 
           
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -490,10 +505,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
             this.storedBets.push(ticket);
           }
   
-          sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
-      
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
+      sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -502,6 +514,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
 
 }
 
+//initialize ticket object
 var ticket: MatchDetails = {
   matchId: 0,
   competition: '',

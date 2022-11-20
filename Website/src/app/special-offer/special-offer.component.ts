@@ -35,12 +35,12 @@ export class SpecialOfferComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
 
     this.getSpecialOfferMatches();
     this.getTicketData();
   }
 
+  //GET data and populate data table with response  
   getSpecialOfferMatches(){
     this.matchService.getSpecialOfferMatches()
     .subscribe(
@@ -49,7 +49,8 @@ export class SpecialOfferComponent implements AfterViewInit {
       }
     )
   }
-
+  
+  //GET current ticket data from session
   getTicketData(){
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
@@ -60,6 +61,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betHomeWin(row: any){
 
+    //Check if bet is forbidden
     if(row.homeWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -75,14 +77,17 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => {
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -90,9 +95,11 @@ export class SpecialOfferComponent implements AfterViewInit {
   
               obj.odd = row.homeWin;
               obj.bet = "1";
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -103,6 +110,7 @@ export class SpecialOfferComponent implements AfterViewInit {
           });
           } 
       
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -123,15 +131,18 @@ export class SpecialOfferComponent implements AfterViewInit {
   
             this.storedBets.push(ticket);
           }
-      
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
+        
         this.showError = true;
         newStoredBets2.forEach(obj => { 
-  
+          
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -141,6 +152,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "1";
             obj.specialOffer = 2;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -157,9 +169,6 @@ export class SpecialOfferComponent implements AfterViewInit {
           this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
         }
       }
-      
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -168,6 +177,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.draw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -183,14 +193,17 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
     
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => { 
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -198,9 +211,12 @@ export class SpecialOfferComponent implements AfterViewInit {
   
               obj.odd = row.draw;
               obj.bet = "X";
+
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -211,6 +227,7 @@ export class SpecialOfferComponent implements AfterViewInit {
           });
           } 
               
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -233,12 +250,15 @@ export class SpecialOfferComponent implements AfterViewInit {
           }
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
         this.showError = true;
         newStoredBets2.forEach(obj => { 
   
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -248,6 +268,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "X";
             duplicate = true;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -262,9 +283,6 @@ export class SpecialOfferComponent implements AfterViewInit {
           this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
         }
       }
-      
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -273,6 +291,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betAwayWin(row: any){
 
+    //Check if bet is forbidden
     if(row.awayWin == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -288,14 +307,17 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
   
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => { 
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
+              //First remove existing odd from total odds
               var oddsTemp = sessionStorage.getItem("oddsTotal");
               var oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal /= obj.odd;
@@ -303,9 +325,12 @@ export class SpecialOfferComponent implements AfterViewInit {
   
               obj.odd = row.awayWin;
               obj.bet = "2";
+
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -315,7 +340,8 @@ export class SpecialOfferComponent implements AfterViewInit {
             }
           });
           } 
-              
+
+          //If match was not on the ticket add it to the list    
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -338,12 +364,15 @@ export class SpecialOfferComponent implements AfterViewInit {
           }
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
         this.showError = true;
         newStoredBets2.forEach(obj => { 
   
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -353,6 +382,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "2";
             duplicate = true;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -367,9 +397,6 @@ export class SpecialOfferComponent implements AfterViewInit {
           this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
         }
       }
-  
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -378,6 +405,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betHomeOrDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.homeOrDraw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -393,12 +421,14 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
   
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => { 
 
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -408,9 +438,12 @@ export class SpecialOfferComponent implements AfterViewInit {
   
               obj.odd = row.homeOrDraw;
               obj.bet = "1X";
+
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -421,6 +454,7 @@ export class SpecialOfferComponent implements AfterViewInit {
           });
           } 
               
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -444,12 +478,15 @@ export class SpecialOfferComponent implements AfterViewInit {
 
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
         this.showError = true;
         newStoredBets2.forEach(obj => { 
   
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -459,6 +496,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "1X";
             duplicate = true;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -474,9 +512,6 @@ export class SpecialOfferComponent implements AfterViewInit {
         }
       }
 
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
-
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
     }
@@ -484,6 +519,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betAwayOrDraw(row: any){
 
+    //Check if bet is forbidden
     if(row.awayOrDraw == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -499,12 +535,14 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
   
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => { 
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -514,9 +552,12 @@ export class SpecialOfferComponent implements AfterViewInit {
               
               obj.odd = row.awayOrDraw;
               obj.bet = "X2";
+
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -526,7 +567,8 @@ export class SpecialOfferComponent implements AfterViewInit {
             }
           });
           } 
-              
+            
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -550,12 +592,15 @@ export class SpecialOfferComponent implements AfterViewInit {
       
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
         this.showError = true;
         newStoredBets2.forEach(obj => { 
   
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -565,6 +610,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "X2";
             duplicate = true;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -580,9 +626,6 @@ export class SpecialOfferComponent implements AfterViewInit {
         }
   
       }
-      
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -591,6 +634,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
   betHomeOrAway(row: any){
 
+    //Check if bet is forbidden
     if(row.homeOrAway == null) {
       this.toastr.error('Ne možete se kladiti na taj ishod!', 'Greška');
     }
@@ -606,12 +650,14 @@ export class SpecialOfferComponent implements AfterViewInit {
       var duplicate = false;
       var allowSpecialOffer = sessionStorage.getItem("allowSpecialOffer");
   
+      //Another bet from special offer isn't already selected
       if(allowSpecialOffer!.toString() > '0'){
   
         if(newStoredBets2){
 
           newStoredBets2.forEach(obj => { 
             
+            //Check if match is already on the ticket
             if(obj.matchId === row.matchId){
   
               var oddsTemp = sessionStorage.getItem("oddsTotal");
@@ -621,9 +667,12 @@ export class SpecialOfferComponent implements AfterViewInit {
   
               obj.odd = row.homeOrAway;
               obj.bet = "12";
+
+              //Set specialOffer to 2 so we know later if same match is selected from Special or Regular offer
               obj.specialOffer = 2;
               duplicate = true;
   
+              //Add new chosen odd to the total odds
               oddsTemp = sessionStorage.getItem("oddsTotal");
               oddsTotal = JSON.parse(oddsTemp!);
               oddsTotal *= obj.odd
@@ -634,6 +683,7 @@ export class SpecialOfferComponent implements AfterViewInit {
           });
           } 
               
+          //If match was not on the ticket add it to the list
           if(duplicate == false){
   
             ticket.matchId = row.matchId;
@@ -657,12 +707,15 @@ export class SpecialOfferComponent implements AfterViewInit {
       
           sessionStorage.setItem("ticketBets", JSON.stringify(this.storedBets));
       }
+      //Another bet from special offer is already on the ticket
       else {
         this.showError = true;
         newStoredBets2.forEach(obj => { 
   
+          //Loop through all the matches and find special offer match
           if(obj.matchId === row.matchId){
   
+            //First remove existing odd from total odds
             var oddsTemp = sessionStorage.getItem("oddsTotal");
             var oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal /= obj.odd;
@@ -672,6 +725,7 @@ export class SpecialOfferComponent implements AfterViewInit {
             obj.bet = "12";
             duplicate = true;
   
+            //Add new chosen odd to the total odds
             oddsTemp = sessionStorage.getItem("oddsTotal");
             oddsTotal = JSON.parse(oddsTemp!);
             oddsTotal *= obj.odd
@@ -686,9 +740,6 @@ export class SpecialOfferComponent implements AfterViewInit {
           this.toastr.error('Ne možete kombinirati više parova iz Top ponude!', 'Greška');
         }
       }
-  
-      var newStoredBets = sessionStorage.getItem("ticketBets");
-      newStoredBets2 = JSON.parse(newStoredBets!);
 
       this.ticketService.callToggle.next( true );
       this.toggle = !this.toggle;
@@ -697,6 +748,7 @@ export class SpecialOfferComponent implements AfterViewInit {
 
 }
 
+//initialize ticket object
 var ticket: MatchDetails = {
   matchId: 0,
   competition: '',

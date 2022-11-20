@@ -33,11 +33,12 @@ export class ResultsComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
 
     this.getAllMatches();
+    this.getTicketData();
   }
 
+  //Get match data
   getAllMatches(){
     this.matchService.getAllMatches()
     .subscribe(
@@ -47,6 +48,7 @@ export class ResultsComponent implements AfterViewInit {
     );
   }
 
+  //GET current ticket data from session
   getTicketData(){
     var newStoredBets = sessionStorage.getItem("ticketBets");
     var newStoredBets2: MatchDetails[] = JSON.parse(newStoredBets!);
@@ -55,6 +57,7 @@ export class ResultsComponent implements AfterViewInit {
     }
   }
 
+  //Update match outcome for the selected match
   updateMatchOutcome(match: MatchOutcome){
     this.matchService.updateMatchOutcome(match)
     .subscribe(
@@ -64,15 +67,17 @@ export class ResultsComponent implements AfterViewInit {
     );
   }
 
+  //Home win outcome logic
   resultHomeWin(row: any){
 
     match.matchId = row.matchId;
     match.matchOutcome = '1';
-    this.updateMatchOutcome(match);
 
+    this.updateMatchOutcome(match);
     this.toastr.success('Za meč ' + row.homeTeam + ' - ' + row.awayTeam + ' unijeli ste rezultat: ' + match.matchOutcome, '');
   }
 
+  //Draw outcome logic
   resultDraw(row: any){
 
     if(row.draw == null) {
@@ -82,23 +87,25 @@ export class ResultsComponent implements AfterViewInit {
 
       match.matchId = row.matchId;
       match.matchOutcome = 'X';
-      this.updateMatchOutcome(match);
 
+      this.updateMatchOutcome(match);
       this.toastr.success('Za meč ' + row.homeTeam + ' - ' + row.awayTeam + ' unijeli ste rezultat: ' + match.matchOutcome, '');
     }
   }
 
+  //Away win outcome logic
   resultAwayWin(row: any){
 
     match.matchId = row.matchId;
     match.matchOutcome = '2';
-    this.updateMatchOutcome(match);
 
+    this.updateMatchOutcome(match);
     this.toastr.success('Za meč ' + row.homeTeam + ' - ' + row.awayTeam + ' unijeli ste rezultat: ' + match.matchOutcome, '');
   }
 
 }
 
+//initialize match outcome object
 var match: MatchOutcome = {
   
   matchId: 0,
