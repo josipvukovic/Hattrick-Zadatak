@@ -1,9 +1,3 @@
-.main-container {
-    margin-left: auto;
-    margin-right: auto;
-    width: 76%;
-}
-
 nav {
     background-color: #19457a;
     width: 100%;
@@ -23,7 +17,7 @@ nav ul {
 }
 
 ul {
-    padding-top: 5px;
+    padding-top: 1.2em;
 }
 
 ul li {

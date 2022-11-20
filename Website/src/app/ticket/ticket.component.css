@@ -2,7 +2,7 @@
   width: 15%;
   margin: auto;
   float: right;
-  margin-right: 14.4em;
+  margin-right: 13.4em;
 }
 
 .mat-table {
@@ -45,6 +45,7 @@
 
 .oddsTotal {
   color: white;
+  display: table;
 }
 
 .betAmountHeader {
@@ -76,4 +77,32 @@
   background-color: #19457a;
   color:white;
   height: 1px;
+}
+
+.oddsTotalCell {
+  display: table;
+}
+
+@media only screen and (max-width: 1820px) {
+  .mat-elevation-z8 {
+    margin-right: 12.4em;
+  }
+}
+
+@media only screen and (max-width: 1820px) {
+  .mat-elevation-z8 {
+    margin-right: 10.4em;
+  }
+}
+
+@media only screen and (max-width: 1660px) {
+  .mat-elevation-z8 {
+    margin-right: 9.4em;
+  }
+}
+
+@media only screen and (max-width: 1530px) {
+  .mat-elevation-z8 {
+    margin-right: 7.4em;
+  }
 }
