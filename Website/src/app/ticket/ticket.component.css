@@ -7,7 +7,7 @@
 
 .mat-table {
   background-color: #19457a;
-  width: 100%;
+  width: 103%;
 }
 
 .mat-table-top {
@@ -97,7 +97,7 @@
 
 @media only screen and (max-width: 1660px) {
   .mat-elevation-z8 {
-    margin-right: 9.4em;
+    margin-right: 8.4em;
   }
 }
 
