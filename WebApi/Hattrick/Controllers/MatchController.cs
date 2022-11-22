@@ -126,8 +126,7 @@ namespace Hattrick.Controllers
         [ActionName("GetTickets")]
         public async Task<IActionResult> GetTickets()
         {
-            var tickets = await hattrickDbContext.Ticket.ToListAsync();
-            var matches = await hattrickDbContext.MatchDetails.ToListAsync();
+            var tickets = await hattrickDbContext.Ticket.Include(m => m.Matches).ToListAsync();
 
             return Ok(tickets);
         }
