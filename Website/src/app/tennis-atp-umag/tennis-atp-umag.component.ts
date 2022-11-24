@@ -20,6 +20,7 @@ export class TennisAtpUmagComponent implements AfterViewInit {
   dataSource: TennisAtpUmagDataSource;
   toggle = true;
   storedBets: MatchDetails [] = [];
+  competition: string = 'ATP Umag';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'awayWin', 'matchDateTime'];
@@ -32,13 +33,13 @@ export class TennisAtpUmagComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    this.getTennisATPUmag();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response
-  getTennisATPUmag(){
-    this.matchService.getTennisATPUmag()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, false)
     .subscribe(
       response => {
         this.table.dataSource = response;

@@ -20,6 +20,7 @@ export class TennisWimbledonComponent implements AfterViewInit {
   dataSource: TennisWimbledonDataSource;
   toggle = true;
   storedBets: MatchDetails [] = [];
+  competition: string = 'Wimbledon';
   
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'awayWin', 'matchDateTime'];
@@ -32,13 +33,13 @@ export class TennisWimbledonComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    this.getTennisWimbledon();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response
-  getTennisWimbledon(){
-    this.matchService.getTennisWimbledon()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, false)
     .subscribe(
       response => {
         this.table.dataSource = response;

@@ -21,29 +21,9 @@ export class MatchService {
     return this.http.get<Match[]>(this.baseUrl);
   }
 
-  // GET special offer matches
-  getSpecialOfferMatches(): Observable<SpecialOffer[]>{
-    return this.http.get<SpecialOffer[]>(this.baseUrl + '/GetSpecialOffer');
-  }
-
-  // GET football Croatian league matches
-  getFootballCroatia(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetFootballCroatia');
-  }
-
-  // GET football England league matches
-  getFootballEngland(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetFootballEngland');
-  }
-
-  // GET football Spain league matches
-  getFootballSpain(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetFootballSpain');
-  }    
-
-  // GET football Italy league matches
-  getFootballItaly(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetFootballItaly');
+  getMatches(competition: string, specialOffer: boolean): Observable<Match[]>
+  {
+    return this.http.get<Match[]>(`https://localhost:7292/api/Match/GetMatches?competition=${competition}&specialOffer=${specialOffer}`);
   }
 
   // GET tickets
@@ -64,26 +44,6 @@ export class MatchService {
   // Submit ticket
   addTransaction(transaction: Transaction): Observable<Transaction>{
     return this.http.post<Transaction>(this.baseUrl + '/AddTransaction', transaction);
-  }
-
-  // GET NBA
-  getBasketballNBA(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetBasketballNBA');
-  }
-
-  // GET Euroleague
-  getBasketballEuroleague(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetBasketballEuroleague');
-  }
-
-  // Get Wimbledon
-  getTennisWimbledon(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetTennisWimbledon');
-  }
-
-  // Get ATP Umag
-  getTennisATPUmag(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl + '/GetTennisATPUmag');
   }
 
   // Update match outcome for selected match

@@ -20,6 +20,7 @@ export class FootballEnglandComponent implements AfterViewInit {
   dataSource: FootballEnglandDataSource;
   toggle = true;
   storedBets: MatchDetails [] = [];
+  competition: string = 'Engleska 1';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
@@ -32,13 +33,13 @@ export class FootballEnglandComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     
-    this.getFootballEngland();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response
-  getFootballEngland(){
-    this.matchService.getFootballEngland()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, false)
     .subscribe(
       response => {
         this.table.dataSource = response;

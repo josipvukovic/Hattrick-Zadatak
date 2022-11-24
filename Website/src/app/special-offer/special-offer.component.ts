@@ -22,6 +22,7 @@ export class SpecialOfferComponent implements AfterViewInit {
   status = 'Enable';
   storedBets: MatchDetails [] = [];
   showError = true;
+  competition: string = 'SpecialOffer';
   
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
@@ -36,18 +37,18 @@ export class SpecialOfferComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
-    this.getSpecialOfferMatches();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response  
-  getSpecialOfferMatches(){
-    this.matchService.getSpecialOfferMatches()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, true)
     .subscribe(
       response => {
         this.table.dataSource = response;
       }
-    )
+    );
   }
   
   //GET current ticket data from session

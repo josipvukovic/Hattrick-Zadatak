@@ -20,6 +20,7 @@ export class BasketballEuroleagueComponent implements AfterViewInit {
   dataSource: BasketballEuroleagueDataSource;
   toggle = true;
   storedBets: MatchDetails [] = [];
+  competition: string = 'Euroleague';
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'matchDateTime'];
@@ -32,13 +33,13 @@ export class BasketballEuroleagueComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     
-    this.getBasketballEuroleague();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response
-  getBasketballEuroleague(){
-    this.matchService.getBasketballEuroleague()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, false)
     .subscribe(
       response => {
         this.table.dataSource = response;

@@ -20,6 +20,7 @@ export class FootballCroatiaComponent implements AfterViewInit {
   dataSource: FootballCroatiaDataSource;
   toggle = true;
   storedBets: MatchDetails [] = [];
+  competition: string = 'Hrvatska 1';
   
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['homeTeam', 'awayTeam', 'homeWin', 'draw', 'awayWin', 'homeOrDraw', 'awayOrDraw', 'homeOrAway', 'matchDateTime'];
@@ -32,13 +33,13 @@ export class FootballCroatiaComponent implements AfterViewInit {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     
-    this.getFootballCroatia();
+    this.getMatches(this.competition);
     this.getTicketData();
   }
 
   //GET data and populate data table with response
-  getFootballCroatia(){
-    this.matchService.getFootballCroatia()
+  getMatches(competition: string){
+    this.matchService.getMatches(competition, false)
     .subscribe(
       response => {
         this.table.dataSource = response;
