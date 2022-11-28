@@ -29,10 +29,6 @@ namespace Hattrick.Data.Services
     public class DataService : IDataService
     {
 
-        public DataService() 
-        {
-        }
-
         public Match[] GetData()
         {
             List<Match> matches = new List<Match>();

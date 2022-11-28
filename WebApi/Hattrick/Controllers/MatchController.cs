@@ -81,6 +81,16 @@ namespace Hattrick.Controllers
         [Route("AddTicket")]
         public async Task<IActionResult> AddTicket([FromBody] Ticket ticket)
         {
+            ticket.TicketStatus = 1;
+
+            //Check if any of the bets are down
+            foreach (var match in ticket.Matches)
+            {
+                if (!match.Bet.Contains(match.MatchOutcome!))
+                {
+                    ticket.TicketStatus = 0;
+                }
+            }
 
             await hattrickDbContext.Ticket.AddAsync(ticket);
             await hattrickDbContext.SaveChangesAsync();
@@ -111,30 +121,6 @@ namespace Hattrick.Controllers
             return CreatedAtAction(nameof(GetTickets), transaction.TransactionId, transaction);
         }
 
-        //Update Match outcome by matchId
-        [HttpPut]
-        [Route("UpdateMatchOutcome")]
-        public async Task<IActionResult> UpdateMatchOutcome([FromBody] Match match)
-        {
-            //update MatchOutcome field in Match table
-            var item = await hattrickDbContext.Match.FirstOrDefaultAsync(m => m.MatchId == match.MatchId);
-            if(item != null)
-            {
-                item.MatchOutcome = match.MatchOutcome;
-                await hattrickDbContext.SaveChangesAsync();
-            }
-            //update all MatchOutcome fields for MatchId in MatchDetails table
-            var matches = await hattrickDbContext.MatchDetails.Where(m => m.MatchId == match.MatchId).ToListAsync();
-            if(matches != null)
-            {
-                foreach(var element in matches)
-                {
-                    element.MatchOutcome = match.MatchOutcome;
-                    await hattrickDbContext.SaveChangesAsync();
-                }
-            }
 
-            return CreatedAtAction(nameof(GetMatches), match);
-        }
     }
 }

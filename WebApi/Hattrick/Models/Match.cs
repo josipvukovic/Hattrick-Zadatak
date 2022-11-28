@@ -18,6 +18,6 @@ namespace Hattrick.Models
         public decimal? HomeOrAway { get; set; }
         public string MatchDateTime { get; set; }
         public bool SpecialOffer { get; set; }
-        public string? MatchOutcome { get; set; }
+        public string MatchOutcome { get; set; }
     }
 }

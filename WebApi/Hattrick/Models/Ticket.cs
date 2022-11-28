@@ -13,6 +13,7 @@ namespace Hattrick.Models
         public decimal OddsTotal { get; set; }
         public decimal BetAmount { get; set; }
         public decimal WinningAmount { get; set; }
+        public int TicketStatus { get; set; }
 
     }
 }
