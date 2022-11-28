@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { DataTableComponent } from './data-table/data-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -28,14 +27,12 @@ import { BasketballNbaComponent } from './basketball-nba/basketball-nba.componen
 import { BasketballEuroleagueComponent } from './basketball-euroleague/basketball-euroleague.component';
 import { TennisWimbledonComponent } from './tennis-wimbledon/tennis-wimbledon.component';
 import { TennisAtpUmagComponent } from './tennis-atp-umag/tennis-atp-umag.component';
-import { ResultsComponent } from './results/results.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    DataTableComponent,
     TicketAssetComponent,
     SpecialOfferComponent,
     FootballCroatiaComponent,
@@ -50,7 +47,6 @@ import { ResultsComponent } from './results/results.component';
     BasketballEuroleagueComponent,
     TennisWimbledonComponent,
     TennisAtpUmagComponent,
-    ResultsComponent
   ],
   imports: [
     BrowserModule,

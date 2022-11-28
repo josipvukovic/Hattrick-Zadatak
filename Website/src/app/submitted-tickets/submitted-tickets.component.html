@@ -17,6 +17,14 @@
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell class="header-cell" *matCellDef="let row">Dobitak: {{row.winningAmount | number : '.2-2'}} kn</td>
     </ng-container> 
+    <ng-container matColumnDef="ticketStatus">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell class="header-cell" *matCellDef="let row">
+        <span *ngIf="row.ticketStatus === 1">Stanje listića: DOBITAN</span>
+        <span *ngIf="row.ticketStatus === 0">Stanje listića: GUBITAN</span>
+      </td>
+    </ng-container>
+
 
     <!-- Expanded content -->
     <ng-container matColumnDef="matchDetailColumns">

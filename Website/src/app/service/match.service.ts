@@ -16,11 +16,7 @@ export class MatchService {
 
   constructor(private http: HttpClient) { }
 
-  // GET all matches
-  getAllMatches(): Observable<Match[]>{
-    return this.http.get<Match[]>(this.baseUrl);
-  }
-
+  //Get data
   getMatches(competition: string, specialOffer: boolean): Observable<Match[]>
   {
     return this.http.get<Match[]>(`https://localhost:7292/api/Match/GetMatches?competition=${competition}&specialOffer=${specialOffer}`);
@@ -46,8 +42,4 @@ export class MatchService {
     return this.http.post<Transaction>(this.baseUrl + '/AddTransaction', transaction);
   }
 
-  // Update match outcome for selected match
-  updateMatchOutcome(match: MatchOutcome): Observable<MatchOutcome>{
-    return this.http.put<MatchOutcome>(this.baseUrl + '/UpdateMatchOutcome', match);
-  }
 }
