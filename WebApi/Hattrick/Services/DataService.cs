@@ -21,11 +21,6 @@ namespace Hattrick.Data.Services
         public List<Competition> competitions { get; set; }
     }
 
-    public interface IDataService
-    {
-        public Match[] GetData();
-    }
-
     public class DataService : IDataService
     {
 
