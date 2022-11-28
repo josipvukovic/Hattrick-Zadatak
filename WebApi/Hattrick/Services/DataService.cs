@@ -74,11 +74,14 @@ namespace Hattrick.Data.Services
                         match.AwayOrDraw = null;
                         match.HomeOrAway = null;
 
-                        if (c.sport == "Football" || c.sport == "Basketball")
+                        if (c.sport != "Tennis")
                         {
                             match.Draw = (decimal)r.Next(111, 450) / 100;
                             match.HomeOrDraw = (decimal)r.Next(111, 450) / 100;
                             match.AwayOrDraw = (decimal)r.Next(111, 450) / 100;
+                        }
+                        if (c.sport == "Football")
+                        {
                             match.HomeOrAway = (decimal)r.Next(111, 450) / 100;
                         }
 
