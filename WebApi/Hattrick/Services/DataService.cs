@@ -12,6 +12,7 @@ namespace Hattrick.Data.Services
     public class Competition
     {
         public string competition { get; set; }
+        public string sport { get; set; }
         public List<string> competitors { get; set; }
     }
 
@@ -75,12 +76,20 @@ namespace Hattrick.Data.Services
                         match.AwayTeam = c.competitors[i + 1];
                         match.MatchOutcome = r.Next(0, 3).ToString();
                         match.HomeWin = (decimal)r.Next(111, 450) / 100;
-                        match.Draw = (decimal)r.Next(111, 450) / 100;
                         match.AwayWin = (decimal)r.Next(111, 450) / 100;
-                        match.HomeOrDraw = (decimal)r.Next(111, 450) / 100;
-                        match.AwayOrDraw = (decimal)r.Next(111, 450) / 100;
-                        match.HomeOrAway = (decimal)r.Next(111, 450) / 100;
                         match.SpecialOffer = r.Next(2) == 1;
+                        match.Draw = null;
+                        match.HomeOrDraw = null;
+                        match.AwayOrDraw = null;
+                        match.HomeOrAway = null;
+
+                        if (c.sport == "Football" || c.sport == "Basketball")
+                        {
+                            match.Draw = (decimal)r.Next(111, 450) / 100;
+                            match.HomeOrDraw = (decimal)r.Next(111, 450) / 100;
+                            match.AwayOrDraw = (decimal)r.Next(111, 450) / 100;
+                            match.HomeOrAway = (decimal)r.Next(111, 450) / 100;
+                        }
 
                         matches.Add(match);
                     }
