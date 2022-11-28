@@ -1,6 +1,6 @@
 using Hattrick.Data;
+using Hattrick.Data.Services;
 using Microsoft.EntityFrameworkCore;
-using System.ComponentModel;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -13,6 +13,10 @@ builder.Services.AddSwaggerGen();
 //InjectDbContext
 builder.Services.AddDbContext<HattrickDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("HattrickDbConnectionString")));
+
+builder.Services.AddHostedService<HostedService>();
+builder.Services.AddSingleton<IDataService, DataService>();
+
 
 // Set access to API rules
 builder.Services.AddCors((setup) =>
@@ -38,12 +42,9 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<HattrickDbContext>();
     context.Database.Migrate();
-    //Configure the Database to allow OPENROWSET. WITH THIS WORKAROUND WE PRESUME 'ad hoc distributed queries' IS NOT ENABLED ON FIRST START.
+
+    //Clean the match table before data reinsert
     context.Database.ExecuteSqlRaw(GlobalData.DbConfigurationQuery);
-    //OPENROWSET query is not allowed inside migrations if database is not configured properly so we run it manually after configuration is done
-    context.Database.ExecuteSqlRaw(GlobalData.InsertDataQuery);
-    //Insert Special offer matches
-    context.Database.ExecuteSqlRaw(GlobalData.InsertSpecialOffer);
 }
 
 app.UseCors("default");

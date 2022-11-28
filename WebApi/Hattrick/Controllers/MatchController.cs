@@ -20,104 +20,49 @@ namespace Hattrick.Controllers
 
         //GET all matches
         [HttpGet]
-        public async Task<IActionResult> GetAllMatches()
+        [Route("GetMatches")]
+        public async Task<IActionResult> GetMatches([FromQuery] string competition, [FromQuery] bool specialOffer)
         {
-            var matches = await hattrickDbContext.Match.ToListAsync();
-            return Ok(matches);
-        }
+            if(specialOffer == true)
+            {   
+                //Get only special offer matches
+                var matches = await hattrickDbContext.Match.Where(m => m.SpecialOffer == true).ToListAsync();
 
-        //GET match by Id
-        [HttpGet]
-        [Route("{id}")]
-        public async Task<IActionResult> GetMatch([FromRoute] int id)
-        {
-            var match = await hattrickDbContext.Match.FirstOrDefaultAsync(x => x.MatchId == id);
-            if(match != null)
-            {
-                return Ok(match);
+                //Special offer tips have better odds
+                foreach (var match in matches)
+                {
+                    match.HomeWin += (decimal)0.1;
+                    match.AwayWin += (decimal)0.1;
+                    match.Draw += (decimal)0.1;
+                    match.HomeOrDraw += (decimal)0.1;
+                    match.AwayOrDraw += (decimal)0.1;
+                    match.HomeOrAway += (decimal)0.1;
+                }
+                return Ok(matches);
             }
-            return NotFound("Match not found");
+            else
+            {
+                //Get only one competition
+                var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains(competition)).ToListAsync();
+                return Ok(matches);
+            }
         }
 
-        //GET special offer matches
-        [HttpGet]
-        [Route("GetSpecialOffer")]
-        public async Task<IActionResult> GetSpecialOfferMatches()
+        //POST matches
+        [HttpPost]
+        [Route("AddMatches")]
+        public async Task<IActionResult> AddMatches(Match[] matches)
         {
-            var matches = await hattrickDbContext.SpecialOffer.ToListAsync();
-            return Ok(matches);
-        }
+            if (matches != null)
+            {
+                foreach (var match in matches)
+                {
+                    await hattrickDbContext.Match.AddAsync(match);
+                }
+            }
+            await hattrickDbContext.SaveChangesAsync();
 
-        //GET Croatian league 
-        [HttpGet]
-        [Route("GetFootballCroatia")]
-        public async Task<IActionResult> GetFootballCroatia()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Hrvatska 1")).ToListAsync();
-            return Ok(matches);
-        }
-
-        //GET English league
-        [HttpGet]
-        [Route("GetFootballEngland")]
-        public async Task<IActionResult> GetFootballEngland()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Engleska 1")).ToListAsync();
-            return Ok(matches);
-        }
-       
-        //GET Spanish league 
-        [HttpGet]
-        [Route("GetFootballSpain")]
-        public async Task<IActionResult> GetFootballSpain()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Španjolska 1")).ToListAsync();
-            return Ok(matches);
-        }
-        
-        //GET Italian league
-        [HttpGet]
-        [Route("GetFootballItaly")]
-        public async Task<IActionResult> GetFootballItaly()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Italija 1")).ToListAsync();
-            return Ok(matches);
-        }
-
-        //GET NBA
-        [HttpGet]
-        [Route("GetBasketballNBA")]
-        public async Task<IActionResult> GetBasketballNBA()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("NBA")).ToListAsync();
-            return Ok(matches);
-        }
-
-        //GET Euroleague
-        [HttpGet]
-        [Route("GetBasketballEuroleague")]
-        public async Task<IActionResult> GetBasketballEuroleague()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Euroleague")).ToListAsync();
-            return Ok(matches);
-        }
-
-        //GET Wimbledon
-        [HttpGet]
-        [Route("GetTennisWimbledon")]
-        public async Task<IActionResult> GetTennisWimbledon()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("Wimbledon")).ToListAsync();
-            return Ok(matches);
-        }
-
-        //GET ATP Umag
-        [HttpGet]
-        [Route("GetTennisATPUmag")]
-        public async Task<IActionResult> GetTennisATPUmag()
-        {
-            var matches = await hattrickDbContext.Match.Where(m => m.Competition.Contains("ATP Umag")).ToListAsync();
-            return Ok(matches);
+            return CreatedAtAction(nameof(GetMatches), matches);
         }
 
         //GET submited tickets 
@@ -189,7 +134,7 @@ namespace Hattrick.Controllers
                 }
             }
 
-            return CreatedAtAction(nameof(GetAllMatches), match);
+            return CreatedAtAction(nameof(GetMatches), match);
         }
     }
 }

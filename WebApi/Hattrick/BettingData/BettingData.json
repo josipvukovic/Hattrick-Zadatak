@@ -1,0 +1,120 @@
+{
+  "competitions": [
+    {
+      "competition": "Hrvatska 1",
+      "competitors": [
+        "Hajduk",
+        "Dinamo",
+        "Rijeka",
+        "Istra",
+        "Osijek",
+        "Slaven Belupo",
+        "Varaždin",
+        "Lokomotiva",
+        "Šibenik",
+        "Gorica"
+      ]
+    },
+    {
+      "competition": "Engleska 1",
+      "competitors": [
+        "Arsenal",
+        "Manchester City",
+        "Newcastle",
+        "Tottenham",
+        "Manchester Utd",
+        "Liverpool",
+        "Brighton",
+        "Chelsea",
+        "Fulham",
+        "Brentford"
+      ]
+    },
+    {
+      "competition": "Italija 1",
+      "competitors": [
+        "Napoli",
+        "AC Milan",
+        "Juventus",
+        "Lazio",
+        "Inter",
+        "Atalanta",
+        "AS Roma",
+        "Udinese",
+        "Torino",
+        "Fiorentina"
+      ]
+    },
+    {
+      "competition": "Španjolska 1",
+      "competitors": [
+        "Barcelona",
+        "Real Madrid",
+        "Real Sociedad",
+        "Ath. Bilbao",
+        "Atl. Madrid",
+        "Betis",
+        "Osasuna",
+        "Rayo Vallecano",
+        "Villarreal",
+        "Valencia"
+      ]
+    },
+    {
+      "competition": "Euroleague",
+      "competitors": [
+        "Fenerbahce",
+        "Olympiakos",
+        "Real Madrid",
+        "Barcelona",
+        "Monaco",
+        "Zalgiris Kaunas",
+        "Anadolu Efes",
+        "Baskonia",
+        "Maccabi Tel Aviv",
+        "Virtus Bologna"
+      ]
+    },
+    {
+      "competition": "NBA",
+      "competitors": [
+        "Phoenix Suns",
+        "Denver Nuggets",
+        "Memphis Grizzlies",
+        "New Orleans Pelicans",
+        "Los Angeles Clippers",
+        "Sacramento Kings",
+        "Portland Trail Blazers",
+        "Utah Jazz",
+        "Golden State Warriors",
+        "Minnesota Timberwolves"
+      ]
+    },
+    {
+      "competition": "ATP Umag",
+      "competitors": [
+        "Alcaraz C.",
+        "Bagnis F.",
+        "Zapata Miralles B.",
+        "Zeppieri G.",
+        "Carballes Baena R.",
+        "Gombos N.",
+        "Cecchinato M.",
+        "Agamenone F."
+      ]
+    },
+    {
+      "competition": "Wimbledon",
+      "competitors": [
+        "Đoković N.",
+        "Sinner J.",
+        "Fritz T.",
+        "Nadal R.",
+        "Goffin D.",
+        "Norrie C.",
+        "Garin C.",
+        "Kyrgios N."
+      ]
+    }
+  ]
+}
